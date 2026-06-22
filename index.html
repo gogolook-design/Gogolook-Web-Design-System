@@ -6,76 +6,44 @@
 <title>Gogolook Web Design System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   DESIGN TOKENS
+   GOGOLOOK.COM ACTUAL TOKENS (from Webflow CSS)
    ============================================================ */
 :root {
-  --gl-blue:       #0058EA;
-  --gl-shadow:     #0F2647;
-  --gl-horizon:    #00C0FE;
-  --gl-green:      #01D3B8;
-  --gl-genuine:    #008CF4;
+  --blue:        #0058EA;
+  --dark-blue:   #0F2647;
+  --light-blue:  #008CF4;
+  --green:       #01D3B8;
+  --bg-blue:     #E7F1FD;
+  --white:       #FFFFFF;
+  --navy:        #182c4f;
+  --slate:       #5d6c7b;
+  --muted:       #758696;
+  --red:         #ea384c;
 
-  --gl-blue-01:    #3379EE;
-  --gl-blue-02:    #80ABF5;
-  --gl-blue-03:    #CCDDFA;
-  --gl-shadow-01:  #3F516C;
-  --gl-shadow-02:  #8793A3;
-  --gl-shadow-03:  #CFD4DB;
-  --gl-horizon-01: #33CDFE;
-  --gl-horizon-02: #80DFFF;
-  --gl-horizon-03: #CCF2FF;
-  --gl-green-01:   #34DCC6;
-  --gl-green-02:   #80E9DB;
-  --gl-green-03:   #CCF5EF;
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
 
-  --white:         #FFFFFF;
-  --gray-50:       #F9FAFB;
-  --gray-100:      #F5F7FA;
-  --gray-200:      #E2E8F0;
-  --gray-300:      #C4C9D2;
-  --gray-400:      #94A3B8;
-  --gray-500:      #64748B;
-  --gray-600:      #4A5568;
-  --gray-700:      #334155;
-  --gray-800:      #1E293B;
-  --gray-900:      #0F172A;
-
-  --success:       #01D3B8;
-  --success-bg:    #CCF5EF;
-  --warning:       #F59E0B;
-  --warning-bg:    #FEF3C7;
-  --error:         #EF4444;
-  --error-bg:      #FEE2E2;
-  --info:          #00C0FE;
-  --info-bg:       #CCF2FF;
-
-  --font-display:  'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-body:     'Inter', system-ui, sans-serif;
-  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
-
-  --sidebar-w:     240px;
-  --content-max:   1000px;
-
-  --gradient-brand: linear-gradient(180deg, var(--gl-blue) 0%, var(--gl-shadow) 100%);
+  --sidebar-w:    240px;
+  --gradient-main: linear-gradient(162deg, var(--dark-blue), var(--blue) 36%, var(--light-blue) 69%, var(--green));
+  --gradient-testimonial: linear-gradient(225deg, #40deca4d 26%, #3fd0fe4d 52%, #d1e3fc80 61%);
+  --gradient-partner: linear-gradient(214deg, #000, #0058ea80 0%, #d1e3fc80 50%);
 }
 
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
-  font-size: 15px; line-height: 1.6;
-  color: var(--gray-800); background: var(--gray-50);
+  font-size: 16px; line-height: 140%;
+  color: var(--dark-blue); background: var(--white);
   -webkit-font-smoothing: antialiased;
 }
 body.locked { overflow: hidden; }
 img { max-width: 100%; display: block; }
-code { font-family: var(--font-mono); font-size: 0.88em; }
+code { font-family: var(--font-mono); font-size: 0.85em; background: #f3f3f3; padding: 2px 8px; border-radius: 4px; }
 
 /* ============================================================
    PASSWORD GATE
@@ -83,486 +51,426 @@ code { font-family: var(--font-mono); font-size: 0.88em; }
 .login-gate {
   position: fixed; inset: 0; z-index: 9999;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--gl-shadow) 0%, var(--gl-blue) 50%, var(--gl-green) 100%);
+  background: var(--gradient-main);
 }
 .login-gate.hidden { display: none; }
 .login-box { text-align: center; color: var(--white); }
-.login-logo {
-  width: 200px; margin: 0 auto 8px;
-}
+.login-logo { width: 200px; margin: 0 auto 8px; }
 .login-logo svg { width: 100%; height: auto; }
-.login-sub {
-  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-  opacity: 0.6; margin-bottom: 36px;
-}
+.login-sub { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; margin-bottom: 36px; }
 .login-input {
   display: block; width: 320px; margin: 0 auto 12px;
   padding: 14px 20px; font-size: 15px; font-family: var(--font-body);
   background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 10px; color: var(--white); outline: none;
+  border-radius: 100px; color: var(--white); outline: none;
 }
 .login-input::placeholder { color: rgba(255,255,255,0.5); }
-.login-input:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.15); }
+.login-input:focus { border-color: rgba(255,255,255,0.5); }
 .login-btn {
   display: block; width: 320px; margin: 0 auto;
-  padding: 14px 20px; font-size: 15px; font-weight: 600;
-  font-family: var(--font-body);
-  background: var(--white); color: var(--gl-shadow);
-  border: none; border-radius: 10px; cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  padding: 14px 20px; font-size: 15px; font-weight: 600; font-family: var(--font-body);
+  background: var(--white); color: var(--dark-blue);
+  border: none; border-radius: 100px; cursor: pointer; transition: all 0.2s;
 }
-.login-btn:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+.login-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
 .login-error { color: #FF6B6B; font-size: 13px; margin-top: 12px; min-height: 20px; }
 
 /* ============================================================
-   LAYOUT: SIDEBAR + MAIN
+   SIDEBAR
    ============================================================ */
 .shell { display: flex; min-height: 100vh; }
 
 .sidebar {
   width: var(--sidebar-w); flex-shrink: 0;
   position: sticky; top: 0; height: 100vh;
-  background: var(--white);
-  border-right: 1px solid var(--gray-200);
-  padding: 24px 16px;
-  display: flex; flex-direction: column;
-  overflow-y: auto;
-  z-index: 100;
+  background: var(--white); border-right: 1px solid #ededed;
+  padding: 24px 16px; display: flex; flex-direction: column;
+  overflow-y: auto; z-index: 100;
 }
 .sb-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
 .sb-logo svg { width: 24px; height: 24px; }
-.sb-logo-text { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--gray-900); }
-.sb-subtitle { font-size: 11px; font-weight: 600; color: var(--gray-400); letter-spacing: 0.04em; margin-bottom: 24px; }
-
+.sb-logo-text { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--dark-blue); }
+.sb-subtitle { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 24px; }
 .sb-section-label {
   font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gray-400); padding: 8px 10px 4px; margin-top: 8px;
+  color: #aaadb0; padding: 8px 10px 4px; margin-top: 8px;
 }
 .toc { display: flex; flex-direction: column; gap: 1px; }
 .toc a {
-  display: flex; align-items: center; gap: 8px;
-  padding: 7px 10px; border-radius: 6px;
-  font-size: 13px; font-weight: 500; color: var(--gray-600);
+  display: block; padding: 7px 10px; border-radius: 6px;
+  font-size: 13px; font-weight: 500; color: var(--slate);
   text-decoration: none; transition: all 0.15s;
 }
-.toc a:hover { background: var(--gray-100); color: var(--gray-900); }
-.toc a.active { background: var(--gl-blue-03); color: var(--gl-blue); font-weight: 600; }
-.toc-dot {
-  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
-}
-
+.toc a:hover { background: var(--bg-blue); color: var(--blue); }
+.toc a.active { background: var(--bg-blue); color: var(--blue); font-weight: 600; }
 .sb-footer {
   margin-top: auto; padding-top: 16px;
-  font-size: 10px; color: var(--gray-400); line-height: 1.6;
+  font-size: 10px; color: #aaadb0; line-height: 1.6;
 }
 .sb-version {
-  display: inline-block; padding: 2px 8px; border-radius: 4px;
-  background: var(--gl-blue-03); color: var(--gl-blue);
+  display: inline-block; padding: 2px 8px; border-radius: 100px;
+  background: var(--bg-blue); color: var(--blue);
   font-size: 10px; font-weight: 700; margin-bottom: 4px;
 }
 
 /* ============================================================
    MAIN CONTENT
    ============================================================ */
-main {
-  flex: 1; min-width: 0;
-  padding: 48px 56px 120px;
-  max-width: calc(var(--content-max) + 112px);
-}
+main { flex: 1; min-width: 0; padding: 48px 56px 120px; max-width: calc(1000px + 112px); }
 
-/* Section */
 .sec { scroll-margin-top: 24px; padding-bottom: 72px; margin-bottom: 72px; }
 
-/* Section hero */
 .sec-hero {
-  border-radius: 16px; padding: 40px 36px;
+  border-radius: 20px; padding: 40px 36px;
   color: var(--white); margin-bottom: 48px;
   position: relative; overflow: hidden;
 }
 .sec-hero[data-num]::after {
-  content: attr(data-num);
-  position: absolute; top: -8px; right: 20px;
+  content: attr(data-num); position: absolute; top: -8px; right: 20px;
   font-family: var(--font-display); font-size: 120px; font-weight: 800;
   opacity: 0.1; line-height: 1; pointer-events: none;
 }
-.sec-title {
-  font-family: var(--font-display); font-size: 28px; font-weight: 800;
-  letter-spacing: -0.02em; margin-bottom: 8px;
-}
-.sec-lede { font-size: 15px; line-height: 1.6; opacity: 0.85; max-width: 52ch; }
+.sec-title { font-family: var(--font-display); font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+.sec-lede { font-size: 15px; line-height: 160%; opacity: 0.85; max-width: 52ch; }
+.sec-hero-tokens { background: var(--gradient-main); }
+.sec-hero-components { background: linear-gradient(162deg, var(--dark-blue), var(--blue) 50%); }
+.sec-hero-patterns { background: linear-gradient(162deg, var(--blue) 0%, var(--green) 100%); }
 
-/* Subsection headings */
 .h2 {
   font-family: var(--font-display); font-size: 22px; font-weight: 700;
-  color: var(--gray-900); margin: 48px 0 12px;
+  color: var(--dark-blue); margin: 48px 0 12px;
   display: flex; align-items: center; gap: 10px;
 }
-.h2::before { content: ''; width: 4px; height: 22px; background: var(--gl-blue); border-radius: 4px; flex-shrink: 0; }
-.h3 {
-  font-family: var(--font-display); font-size: 17px; font-weight: 700;
-  color: var(--gray-900); margin: 32px 0 8px;
-}
-p { margin-bottom: 16px; color: var(--gray-600); font-weight: 500; }
-p + p { margin-top: -4px; }
-
-/* Hero colors per section */
-.sec-hero-tokens { background: linear-gradient(135deg, var(--gl-blue) 0%, var(--gl-horizon) 100%); }
-.sec-hero-components { background: linear-gradient(135deg, var(--gl-shadow) 0%, var(--gl-blue) 100%); }
-.sec-hero-patterns { background: linear-gradient(135deg, var(--gl-blue) 0%, var(--gl-green) 100%); }
-.sec-hero-a11y { background: linear-gradient(135deg, var(--gl-shadow) 0%, var(--gl-genuine) 100%); }
+.h2::before { content: ''; width: 4px; height: 22px; background: var(--blue); border-radius: 4px; flex-shrink: 0; }
+.h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--dark-blue); margin: 32px 0 8px; }
+p { margin-bottom: 16px; color: var(--slate); font-weight: 500; line-height: 160%; }
 
 /* ============================================================
-   COMPONENT PREVIEW SYSTEM
+   PREVIEW BLOCK
    ============================================================ */
 .preview-block {
-  border: 1px solid var(--gray-200); border-radius: 12px;
+  border: 1px solid #ededed; border-radius: 20px;
   overflow: hidden; margin: 16px 0 24px; background: var(--white);
 }
 .preview-stage {
   padding: 32px; display: flex; flex-wrap: wrap; align-items: center;
-  gap: 16px; background: var(--white);
-  border-bottom: 1px solid var(--gray-200);
+  gap: 16px; background: var(--white); border-bottom: 1px solid #ededed;
 }
-.preview-stage-dark {
-  background: var(--gl-shadow); border-bottom-color: rgba(255,255,255,0.1);
-}
-.preview-stage-gray {
-  background: var(--gray-100);
-}
-.preview-stage-col {
-  flex-direction: column; align-items: flex-start;
-}
+.preview-stage-dark { background: var(--dark-blue); border-bottom-color: rgba(255,255,255,0.1); }
+.preview-stage-blue { background: var(--blue); border-bottom-color: rgba(255,255,255,0.2); }
+.preview-stage-light { background: var(--bg-blue); }
+.preview-stage-col { flex-direction: column; align-items: flex-start; }
 .preview-code {
-  padding: 20px 24px;
-  background: var(--gray-900); color: var(--gray-300);
+  padding: 20px 24px; background: #0F172A; color: #c8c8c8;
   font-family: var(--font-mono); font-size: 13px; line-height: 1.7;
-  overflow-x: auto; position: relative;
+  overflow-x: auto;
 }
-.preview-code .kw { color: #C792EA; }
-.preview-code .str { color: #C3E88D; }
-.preview-code .cls { color: #82AAFF; }
-.preview-code .tag { color: #F07178; }
-.preview-code .attr { color: #FFCB6B; }
-.preview-code .cmt { color: #546E7A; }
-.preview-code .val { color: #F78C6C; }
-
-.copy-btn {
-  position: absolute; top: 12px; right: 12px;
-  padding: 4px 10px; background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
-  color: var(--gray-400); font-size: 11px; font-weight: 600;
-  font-family: var(--font-body); cursor: pointer;
-  transition: all 0.15s;
+.preview-label {
+  padding: 12px 24px; background: #fafafa; border-bottom: 1px solid #ededed;
+  font-size: 12px; font-weight: 600; color: #aaadb0; letter-spacing: 0.06em; text-transform: uppercase;
 }
-.copy-btn:hover { background: rgba(255,255,255,0.2); color: var(--white); }
 
 /* ============================================================
-   TOKEN DISPLAY
+   TOKEN DISPLAYS
    ============================================================ */
 .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin: 16px 0 24px; }
-.token-swatch {
-  border-radius: 10px; overflow: hidden;
-  border: 1px solid var(--gray-200); background: var(--white);
-}
+.token-swatch { border-radius: 20px; overflow: hidden; border: 1px solid #ededed; background: var(--white); }
 .token-swatch-color { height: 56px; }
 .token-swatch-info { padding: 10px 12px; }
-.token-swatch-name { font-size: 12px; font-weight: 700; color: var(--gray-900); }
-.token-swatch-hex { font-size: 11px; font-weight: 500; color: var(--gray-400); font-family: var(--font-mono); }
-.token-swatch-var { font-size: 10px; font-weight: 500; color: var(--gray-400); font-family: var(--font-mono); }
+.token-swatch-name { font-size: 12px; font-weight: 700; color: var(--dark-blue); }
+.token-swatch-hex { font-size: 11px; font-weight: 500; color: #aaadb0; font-family: var(--font-mono); }
+.token-swatch-var { font-size: 10px; color: #aaadb0; font-family: var(--font-mono); }
 
 .token-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
 .token-table th {
   text-align: left; padding: 10px 16px;
   font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--gray-400); border-bottom: 2px solid var(--gray-200);
+  color: #aaadb0; border-bottom: 2px solid #ededed;
 }
-.token-table td {
-  padding: 12px 16px; border-bottom: 1px solid var(--gray-100);
-  font-weight: 500; color: var(--gray-700);
-}
-.token-table td code {
-  padding: 2px 8px; background: var(--gray-100); border-radius: 4px;
-  font-size: 12px; font-weight: 500; color: var(--gl-blue);
-}
-.token-table tr:last-child td { border-bottom: none; }
+.token-table td { padding: 12px 16px; border-bottom: 1px solid #f3f3f3; font-weight: 500; color: var(--slate); }
+.token-table td code { padding: 2px 8px; background: var(--bg-blue); border-radius: 4px; font-size: 12px; font-weight: 500; color: var(--blue); }
 
 /* Spacing vis */
-.space-bar {
-  display: flex; align-items: center; gap: 12px; margin: 4px 0;
-}
-.space-bar-fill {
-  height: 12px; border-radius: 3px; background: var(--gl-blue-03);
-  border: 1px solid var(--gl-blue-02);
-}
-.space-bar-label { font-size: 12px; font-weight: 600; color: var(--gray-500); font-family: var(--font-mono); min-width: 100px; }
-.space-bar-value { font-size: 11px; color: var(--gray-400); font-family: var(--font-mono); }
-
-/* Radius vis */
-.radius-grid { display: flex; flex-wrap: wrap; gap: 16px; margin: 16px 0 24px; }
-.radius-sample {
-  width: 64px; height: 64px; background: var(--gl-blue-03); border: 2px solid var(--gl-blue);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; color: var(--gl-blue); font-family: var(--font-mono);
-}
+.space-bar { display: flex; align-items: center; gap: 12px; margin: 4px 0; }
+.space-bar-fill { height: 12px; border-radius: 3px; background: var(--bg-blue); border: 1px solid #cde0fb; }
+.space-bar-label { font-size: 12px; font-weight: 600; color: var(--slate); font-family: var(--font-mono); min-width: 60px; }
+.space-bar-value { font-size: 11px; color: #aaadb0; font-family: var(--font-mono); }
 
 /* Shadow vis */
-.shadow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 16px 0 24px; }
+.shadow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin: 16px 0 24px; }
 .shadow-sample {
-  height: 80px; border-radius: 12px; background: var(--white);
+  height: 80px; border-radius: 20px; background: var(--white);
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 600; color: var(--gray-500);
+  font-size: 11px; font-weight: 600; color: var(--slate);
 }
+
+/* Gradient cards */
+.gradient-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 16px 0 24px; }
+.gradient-card {
+  height: 100px; border-radius: 20px; display: flex; align-items: end; padding: 12px 16px;
+  position: relative; overflow: hidden;
+}
+.gradient-card span { font-size: 12px; font-weight: 700; color: white; position: relative; z-index: 1; }
+
+/* Do / Don't */
+.guidelines-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
+.guideline-card { border-radius: 20px; overflow: hidden; border: 1px solid #ededed; }
+.guideline-header { padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+.guideline-do { background: #CCF5EF; color: #047857; }
+.guideline-dont { background: #FEE2E2; color: #991B1B; }
+.guideline-body { padding: 16px; font-size: 13px; color: var(--slate); line-height: 160%; background: var(--white); }
 
 /* ============================================================
-   LIVE COMPONENT DEMOS
+   GOGOLOOK.COM ACTUAL COMPONENTS
    ============================================================ */
 
-/* --- Buttons --- */
+/* --- Header / Navbar (gogolook.com style) --- */
+.demo-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 64px; width: 100%;
+  border-radius: 0; position: relative;
+}
+.demo-header-blue { background: var(--blue); }
+.demo-header-white { background: var(--white); border: 1px solid #ededed; border-radius: 20px; }
+.demo-header-logo { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
+.demo-header-blue .demo-header-logo { color: var(--white); }
+.demo-header-white .demo-header-logo { color: var(--blue); }
+.demo-menu-btn {
+  padding: 0.5rem 1.25rem; border-radius: 100px; font-size: 14px; font-weight: 600;
+  font-family: var(--font-body); cursor: pointer; transition: all 0.2s;
+}
+.demo-menu-btn-white { background: var(--white); color: var(--dark-blue); border: none; }
+.demo-menu-btn-white:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.demo-menu-btn-blue { background: var(--blue); color: var(--white); border: none; }
+.demo-menu-btn-blue:hover { background: #0046BE; }
+.demo-nav-links { display: flex; gap: 2rem; list-style: none; }
+.demo-nav-link { font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+.demo-header-blue .demo-nav-link { color: rgba(255,255,255,0.7); }
+.demo-header-blue .demo-nav-link:hover { color: var(--white); }
+.demo-header-white .demo-nav-link { color: var(--slate); }
+.demo-header-white .demo-nav-link:hover { color: var(--blue); }
+
+/* --- Buttons (all pill-shaped, border-radius: 100px) --- */
 .demo-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 10px 24px; font-family: var(--font-body); font-weight: 600; font-size: 14px;
-  line-height: 1; border-radius: 8px; border: 1.5px solid transparent;
+  padding: 0.75rem 1.5rem; font-family: var(--font-body); font-weight: 600; font-size: 14px;
+  line-height: 1; border-radius: 100px; border: 1.5px solid transparent;
   cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap;
 }
-.demo-btn:focus-visible { outline: 2px solid var(--gl-blue); outline-offset: 2px; }
-.demo-btn-primary { background: var(--gl-blue); color: var(--white); border-color: var(--gl-blue); }
-.demo-btn-primary:hover { background: var(--gl-blue-01); box-shadow: 0 4px 12px rgba(0,88,234,0.3); }
-.demo-btn-secondary { background: var(--white); color: var(--gl-blue); border-color: var(--gl-blue); }
-.demo-btn-secondary:hover { background: var(--gl-blue-03); }
-.demo-btn-ghost { background: transparent; color: var(--gl-blue); border-color: transparent; }
-.demo-btn-ghost:hover { background: var(--gl-blue-03); }
-.demo-btn-dark { background: var(--gl-shadow); color: var(--white); border-color: var(--gl-shadow); }
-.demo-btn-dark:hover { background: var(--gl-shadow-01); }
-.demo-btn-sm { padding: 7px 16px; font-size: 12px; border-radius: 6px; }
-.demo-btn-lg { padding: 14px 32px; font-size: 16px; border-radius: 10px; }
-.demo-btn-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
-.demo-btn-icon { padding: 10px; border-radius: 10px; }
-.demo-btn svg { width: 16px; height: 16px; }
+.demo-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.demo-btn-primary { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.demo-btn-primary:hover { background: #0046BE; border-color: #0046BE; box-shadow: 0 4px 16px rgba(0,88,234,0.3); }
+.demo-btn-outline { background: transparent; color: var(--blue); border-color: var(--blue); }
+.demo-btn-outline:hover { background: var(--bg-blue); }
+.demo-btn-white { background: var(--white); color: var(--dark-blue); border-color: var(--white); }
+.demo-btn-white:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+.demo-btn-ghost { background: transparent; color: var(--blue); border-color: transparent; }
+.demo-btn-ghost:hover { background: var(--bg-blue); }
+.demo-btn-sm { padding: 0.5rem 1.25rem; font-size: 13px; }
+.demo-btn-lg { padding: 1rem 2rem; font-size: 16px; }
+.demo-btn-disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
 
-/* --- Cards --- */
+/* --- Cards (border-radius: 20px, gogolook.com style) --- */
 .demo-card {
-  background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px;
-  padding: 24px; transition: box-shadow 0.2s, transform 0.2s;
+  background: var(--white); border: 1px solid #ededed; border-radius: 20px;
+  padding: 2rem; transition: box-shadow 0.2s, transform 0.2s;
   width: 280px; flex-shrink: 0;
 }
-.demo-card:hover { box-shadow: 0 8px 24px rgba(15,38,71,0.08); transform: translateY(-2px); }
-.demo-card-flat { box-shadow: none; }
-.demo-card-flat:hover { box-shadow: none; transform: none; border-color: var(--gl-blue-02); }
-.demo-card-featured { border: 2px solid var(--gl-blue); }
+.demo-card:hover { box-shadow: 0 3px 8px rgba(0,0,0,0.08); transform: translateY(-2px); }
 .demo-card-img {
-  margin: -24px -24px 16px; border-radius: 12px 12px 0 0; overflow: hidden;
-  height: 140px; background: linear-gradient(135deg, var(--gl-blue) 0%, var(--gl-horizon) 100%);
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.3); font-size: 32px;
+  margin: -2rem -2rem 1.25rem; border-radius: 20px 20px 0 0; overflow: hidden;
+  height: 140px; background: var(--bg-blue);
+  display: flex; align-items: center; justify-content: center; color: var(--blue); font-size: 32px; opacity: 0.4;
 }
-.demo-card-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
-.demo-card-body { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
-.demo-card-footer { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-100); }
+.demo-card-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--dark-blue); margin-bottom: 0.5rem; line-height: 130%; }
+.demo-card-body { font-size: 14px; color: var(--slate); line-height: 160%; }
+.demo-card-footer { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ededed; }
+.demo-card-blue-bg { background: var(--bg-blue); border: none; }
+.demo-card-partner {
+  background: var(--gradient-testimonial); border: none;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 160px;
+}
 
-/* --- Badges --- */
+/* --- Accordion (gogolook.com Products page) --- */
+.demo-accordion { width: 100%; }
+.demo-accordion-item { border-bottom: 1px dashed #c8c8c8; }
+.demo-accordion-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 0; cursor: pointer; transition: color 0.2s;
+}
+.demo-accordion-title {
+  font-family: var(--font-display); font-size: 2rem; font-weight: 700;
+  color: var(--blue); line-height: 120%;
+}
+.demo-accordion-icon {
+  width: 24px; height: 24px; color: var(--blue); transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.demo-accordion-item.open .demo-accordion-icon { transform: rotate(180deg); }
+.demo-accordion-body {
+  padding: 0 0 1.5rem; font-size: 14px; color: var(--slate); line-height: 160%;
+  display: none;
+}
+.demo-accordion-item.open .demo-accordion-body { display: block; }
+
+/* --- Stats / KPIs (gradient bg, large numbers) --- */
+.demo-stats {
+  display: flex; gap: 3rem; padding: 3rem; border-radius: 20px;
+  background: var(--gradient-main); color: var(--white); width: 100%;
+}
+.demo-stat-number {
+  font-family: var(--font-display); font-size: 4rem; font-weight: 700;
+  line-height: 90%; margin-bottom: 0.5rem;
+}
+.demo-stat-label { font-size: 14px; opacity: 0.7; line-height: 140%; }
+
+/* --- Newsletter Form (underline style like gogolook.com) --- */
+.demo-form-underline { width: 100%; max-width: 400px; }
+.demo-input-underline {
+  width: 100%; padding: 12px 0; font-size: 1.25rem; font-family: var(--font-body);
+  color: var(--white); background: transparent;
+  border: none; border-bottom: 1px solid rgba(255,255,255,0.3);
+  outline: none; transition: border-color 0.2s;
+}
+.demo-input-underline::placeholder { color: rgba(255,255,255,0.4); }
+.demo-input-underline:focus { border-bottom-color: var(--white); }
+.demo-input-underline-dark {
+  color: var(--dark-blue); border-bottom-color: #c8c8c8;
+}
+.demo-input-underline-dark::placeholder { color: #aaadb0; }
+.demo-input-underline-dark:focus { border-bottom-color: var(--blue); }
+
+/* --- Boxed Form Input (contact page style) --- */
+.demo-input-boxed {
+  width: 100%; padding: 10px 12px; font-size: 14px; font-family: var(--font-body);
+  color: var(--dark-blue); background: var(--white);
+  border: 1px solid #c8c8c8; border-radius: 0;
+  outline: none; transition: border-color 0.2s;
+}
+.demo-input-boxed:focus { border-color: #3898EC; }
+.demo-input-boxed::placeholder { color: #aaadb0; }
+
+/* --- Footer (Shadow Blue bg, giant logo watermark) --- */
+.demo-footer {
+  background: var(--dark-blue); color: var(--white); padding: 3rem 2rem;
+  border-radius: 20px; width: 100%; position: relative; overflow: hidden;
+}
+.demo-footer-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 2rem;
+  margin-bottom: 2rem; position: relative; z-index: 1;
+}
+.demo-footer-heading { font-family: var(--font-display); font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+.demo-footer-link { display: block; font-size: 14px; color: rgba(255,255,255,0.6); text-decoration: none; padding: 3px 0; transition: color 0.2s; }
+.demo-footer-link:hover { color: var(--white); }
+.demo-footer-watermark {
+  font-family: var(--font-display); font-size: 8rem; font-weight: 800;
+  color: rgba(255,255,255,0.06); line-height: 0.9;
+  position: relative; z-index: 0; margin-top: 1rem;
+}
+.demo-footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 12px; color: rgba(255,255,255,0.4); position: relative; z-index: 1;
+}
+.demo-footer-social { display: flex; gap: 12px; }
+.demo-footer-social-icon {
+  width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 700;
+  transition: all 0.2s;
+}
+.demo-footer-social-icon:hover { border-color: var(--white); color: var(--white); }
+
+/* --- Logo Bar (product logos) --- */
+.demo-logo-bar {
+  display: flex; align-items: center; justify-content: center; gap: 2.5rem;
+  padding: 1.5rem 0; width: 100;
+}
+.demo-logo-item { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: #aaadb0; white-space: nowrap; }
+
+/* --- Feature Icons (What We Do section) --- */
+.demo-feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; width: 100%; }
+.demo-feature-item { }
+.demo-feature-icon {
+  width: 48px; height: 48px; border-radius: 12px; background: var(--bg-blue);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem; font-size: 20px; color: var(--blue);
+}
+.demo-feature-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--dark-blue); margin-bottom: 0.5rem; line-height: 130%; }
+.demo-feature-desc { font-size: 14px; color: var(--slate); line-height: 160%; }
+
+/* --- Badges (gogolook.com style) --- */
 .demo-badge {
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 10px; font-size: 12px; font-weight: 600;
-  border-radius: 99px; white-space: nowrap;
+  padding: 0.25rem 0.75rem; font-size: 12px; font-weight: 600;
+  border-radius: 100px; white-space: nowrap;
 }
-.demo-badge-blue { background: var(--gl-blue-03); color: var(--gl-blue); }
-.demo-badge-green { background: var(--gl-green-03); color: #059669; }
-.demo-badge-horizon { background: var(--gl-horizon-03); color: #0891B2; }
-.demo-badge-shadow { background: var(--gl-shadow-03); color: var(--gl-shadow); }
-.demo-badge-error { background: var(--error-bg); color: var(--error); }
-.demo-badge-warning { background: var(--warning-bg); color: #D97706; }
-.demo-badge-success { background: var(--success-bg); color: #059669; }
+.demo-badge-blue { background: var(--bg-blue); color: var(--blue); }
+.demo-badge-green { background: #CCF5EF; color: #059669; }
+.demo-badge-red { background: #FEE2E2; color: var(--red); }
+.demo-badge-dark { background: var(--dark-blue); color: var(--white); }
 
-/* --- Tags --- */
-.demo-tag {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 4px 12px; font-size: 12px; font-weight: 600;
-  border: 1px solid var(--gray-200); border-radius: 6px;
-  background: var(--white); color: var(--gray-600);
-  cursor: pointer; transition: all 0.15s;
-}
-.demo-tag:hover { border-color: var(--gl-blue); color: var(--gl-blue); background: var(--gl-blue-03); }
-.demo-tag-active { border-color: var(--gl-blue); color: var(--gl-blue); background: var(--gl-blue-03); }
-
-/* --- Form Inputs --- */
-.demo-input-group { display: flex; flex-direction: column; gap: 6px; width: 320px; }
-.demo-label { font-size: 14px; font-weight: 600; color: var(--gray-800); }
-.demo-input {
-  width: 100%; padding: 10px 14px; font-size: 15px; font-family: var(--font-body);
-  color: var(--gray-800); background: var(--white);
-  border: 1.5px solid var(--gray-200); border-radius: 8px;
-  transition: border-color 0.15s, box-shadow 0.15s; outline: none;
-}
-.demo-input::placeholder { color: var(--gray-400); }
-.demo-input:hover { border-color: var(--gray-400); }
-.demo-input:focus { border-color: var(--gl-blue); box-shadow: 0 0 0 3px var(--gl-blue-03); }
-.demo-input-error { border-color: var(--error); }
-.demo-input-error:focus { box-shadow: 0 0 0 3px rgba(239,68,68,0.15); }
-.demo-hint { font-size: 12px; color: var(--gray-400); }
-.demo-error-msg { font-size: 12px; color: var(--error); }
-
-/* --- Textarea --- */
-.demo-textarea { min-height: 100px; resize: vertical; }
-
-/* --- Select --- */
-.demo-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 12px center;
-  padding-right: 40px;
-}
-
-/* --- Checkbox / Radio / Switch --- */
-.demo-check-group { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-.demo-checkbox {
-  width: 18px; height: 18px; border: 2px solid var(--gray-300); border-radius: 4px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  transition: all 0.15s; background: var(--white);
-}
-.demo-checkbox-checked { background: var(--gl-blue); border-color: var(--gl-blue); }
-.demo-checkbox-checked svg { color: var(--white); }
-.demo-radio {
-  width: 18px; height: 18px; border: 2px solid var(--gray-300); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  transition: all 0.15s; background: var(--white);
-}
-.demo-radio-checked { border-color: var(--gl-blue); }
-.demo-radio-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gl-blue); }
-.demo-switch {
-  width: 40px; height: 22px; border-radius: 11px; background: var(--gray-300);
-  position: relative; cursor: pointer; transition: background 0.2s; flex-shrink: 0;
-}
-.demo-switch-on { background: var(--gl-blue); }
-.demo-switch-thumb {
-  width: 16px; height: 16px; border-radius: 50%; background: var(--white);
-  position: absolute; top: 3px; left: 3px; transition: transform 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-.demo-switch-on .demo-switch-thumb { transform: translateX(18px); }
-.demo-check-label { font-size: 14px; font-weight: 500; color: var(--gray-700); }
-
-/* --- Navigation demo --- */
-.demo-navbar {
-  display: flex; align-items: center; justify-content: space-between;
-  height: 56px; padding: 0 24px; background: var(--white);
-  border: 1px solid var(--gray-200); border-radius: 10px;
-  width: 100%;
-}
-.demo-navbar-dark { background: rgba(15,38,71,0.95); border-color: rgba(255,255,255,0.08); }
-.demo-nav-links { display: flex; gap: 24px; list-style: none; }
-.demo-nav-link {
-  font-size: 14px; font-weight: 500; color: var(--gray-500);
-  text-decoration: none; padding: 4px 0;
-  border-bottom: 2px solid transparent; transition: all 0.15s;
-}
-.demo-nav-link:hover { color: var(--gray-900); }
-.demo-nav-link-active { color: var(--gl-blue); border-bottom-color: var(--gl-blue); font-weight: 600; }
-.demo-navbar-dark .demo-nav-link { color: rgba(255,255,255,0.6); }
-.demo-navbar-dark .demo-nav-link:hover { color: var(--white); }
-.demo-navbar-dark .demo-nav-link-active { color: var(--white); border-bottom-color: var(--white); }
-.demo-nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--gl-blue); }
-.demo-navbar-dark .demo-nav-logo { color: var(--white); }
-
-/* --- Alerts --- */
-.demo-alert {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 14px 18px; border-radius: 10px; font-size: 14px; font-weight: 500;
-  width: 100%;
-}
-.demo-alert-info { background: var(--info-bg); color: #0369A1; }
-.demo-alert-success { background: var(--success-bg); color: #047857; }
-.demo-alert-warning { background: var(--warning-bg); color: #92400E; }
-.demo-alert-error { background: var(--error-bg); color: #991B1B; }
-.demo-alert-icon { flex-shrink: 0; font-size: 18px; line-height: 1; }
-
-/* --- Tabs --- */
-.demo-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--gray-200); }
-.demo-tab {
-  padding: 10px 20px; font-size: 14px; font-weight: 600;
-  color: var(--gray-500); cursor: pointer; transition: all 0.15s;
-  border-bottom: 2px solid transparent; margin-bottom: -2px;
-}
-.demo-tab:hover { color: var(--gray-700); }
-.demo-tab-active { color: var(--gl-blue); border-bottom-color: var(--gl-blue); }
-
-/* --- Tooltip --- */
-.demo-tooltip-wrap { position: relative; display: inline-flex; }
-.demo-tooltip {
-  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-  padding: 6px 12px; background: var(--gray-900); color: var(--white);
-  font-size: 12px; font-weight: 500; border-radius: 6px; white-space: nowrap;
-}
-.demo-tooltip::after {
-  content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  border: 5px solid transparent; border-top-color: var(--gray-900);
-}
-
-/* --- Avatar --- */
-.demo-avatar {
-  width: 40px; height: 40px; border-radius: 50%; background: var(--gl-blue);
+/* --- Carousel Nav (circle arrow buttons) --- */
+.demo-carousel-nav { display: flex; gap: 12px; }
+.demo-carousel-btn {
+  width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--blue);
+  background: transparent; color: var(--blue); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  color: var(--white); font-weight: 700; font-size: 14px;
-  font-family: var(--font-display);
+  font-size: 18px; transition: all 0.2s;
 }
-.demo-avatar-sm { width: 28px; height: 28px; font-size: 11px; }
-.demo-avatar-lg { width: 56px; height: 56px; font-size: 20px; }
-.demo-avatar-group { display: flex; }
-.demo-avatar-group .demo-avatar { margin-left: -8px; border: 2px solid var(--white); }
-.demo-avatar-group .demo-avatar:first-child { margin-left: 0; }
+.demo-carousel-btn:hover { background: var(--blue); color: var(--white); }
+.demo-carousel-btn-filled { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.demo-carousel-btn-filled:hover { background: #0046BE; }
 
-/* --- Divider --- */
-.demo-divider { height: 1px; background: var(--gray-200); width: 100%; margin: 8px 0; }
-.demo-divider-label {
-  display: flex; align-items: center; gap: 12px; width: 100%;
-  font-size: 12px; color: var(--gray-400); font-weight: 600;
+/* --- Locale Toggle --- */
+.demo-locale { display: flex; gap: 8px; }
+.demo-locale-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid #ededed;
+  background: var(--white); color: var(--dark-blue); font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: all 0.2s;
 }
-.demo-divider-label::before, .demo-divider-label::after {
-  content: ''; flex: 1; height: 1px; background: var(--gray-200);
-}
+.demo-locale-btn:hover { border-color: var(--blue); color: var(--blue); }
+.demo-locale-btn-active { border-color: var(--blue); color: var(--blue); background: var(--bg-blue); }
 
-/* --- Progress --- */
-.demo-progress { width: 100%; height: 6px; border-radius: 3px; background: var(--gray-200); overflow: hidden; }
-.demo-progress-fill { height: 100%; border-radius: 3px; background: var(--gl-blue); transition: width 0.3s; }
+/* --- Partner Card (gradient bg like gogolook.com) --- */
+.demo-partner-card {
+  background: var(--gradient-testimonial); border-radius: 20px;
+  padding: 2rem; min-height: 180px; display: flex; flex-direction: column;
+  justify-content: flex-end;
+}
+.demo-partner-name { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--dark-blue); }
 
-/* --- Do/Don't --- */
-.guidelines-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
-.guideline-card {
-  border-radius: 10px; overflow: hidden;
-  border: 1px solid var(--gray-200);
+/* --- Checkbox (gogolook.com cookie/form style) --- */
+.demo-checkbox-wrap { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+.demo-checkbox-box {
+  width: 16px; height: 16px; border: 2px solid #c8c8c8; border-radius: 2px;
+  flex-shrink: 0; margin-top: 2px; transition: all 0.15s; background: var(--white);
 }
-.guideline-header {
-  padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
-}
-.guideline-do { background: var(--success-bg); color: #047857; }
-.guideline-dont { background: var(--error-bg); color: #991B1B; }
-.guideline-body { padding: 16px; font-size: 13px; color: var(--gray-600); line-height: 1.6; background: var(--white); }
+.demo-checkbox-checked { background: var(--blue); border-color: var(--blue); }
+.demo-checkbox-label { font-size: 14px; color: var(--slate); line-height: 140%; }
 
 /* ============================================================
    MOBILE
    ============================================================ */
 .mobile-toggle {
   display: none; position: fixed; top: 12px; left: 12px; z-index: 200;
-  width: 40px; height: 40px; border-radius: 10px; border: none;
+  width: 40px; height: 40px; border-radius: 100px; border: none;
   background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   cursor: pointer; font-size: 18px;
 }
-.mobile-overlay {
-  display: none; position: fixed; inset: 0; z-index: 99;
-  background: rgba(0,0,0,0.3);
-}
+.mobile-overlay { display: none; position: fixed; inset: 0; z-index: 99; background: rgba(0,0,0,0.3); }
 
 @media (max-width: 1024px) {
   .mobile-toggle { display: flex; align-items: center; justify-content: center; }
-  .sidebar {
-    position: fixed; left: -280px; width: 260px;
-    transition: left 0.25s; box-shadow: 4px 0 24px rgba(0,0,0,0.1);
-  }
+  .sidebar { position: fixed; left: -280px; width: 260px; transition: left 0.25s; box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
   .sidebar.open { left: 0; }
   main { padding: 48px 24px 120px; }
-  .shadow-grid { grid-template-columns: repeat(2, 1fr); }
+  .demo-feature-grid { grid-template-columns: 1fr 1fr; }
+  .demo-stats { flex-direction: column; gap: 2rem; }
+  .demo-footer-grid { grid-template-columns: 1fr 1fr; }
   .guidelines-grid { grid-template-columns: 1fr; }
-  .preview-stage { padding: 20px; gap: 12px; }
-  .demo-card { width: 240px; }
 }
 </style>
 </head>
@@ -572,7 +480,7 @@ p + p { margin-top: -4px; }
 <div class="login-gate" id="loginGate">
   <div class="login-box">
     <div class="login-logo">
-      <svg viewBox="0 0 1532.9 344.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 1532.9 344.5" xmlns="http://www.w3.org/2000/svg">
         <path d="M1308.97,85.97l-.59-.59c-36.42-36.12-95.21-35.95-131.42.39-17.76,17.4-27.62,41.31-27.29,66.17-.27,24.84,9.55,48.72,27.22,66.18,16.86,17.74,40.26,27.79,64.73,27.82.46,0,.91,0,1.36-.01,24.8.28,48.61-9.7,65.79-27.58,17.84-17.43,27.77-41.4,27.46-66.34.28-24.81-9.56-48.65-27.27-66.03M1242.95,206.11c-29.28,0-53.01-24.15-53.01-53.94s23.73-53.94,53.01-53.94,53.01,24.15,53.01,53.94-23.73,53.94-53.01,53.94" fill="white"/>
         <path d="M828.25,85.97l-.59-.59c-36.42-36.12-95.21-35.95-131.42.39-17.76,17.4-27.62,41.31-27.29,66.17-.27,24.84,9.56,48.72,27.22,66.18,16.86,17.74,40.26,27.79,64.73,27.82.45,0,.91,0,1.36-.01,24.8.28,48.61-9.7,65.79-27.58,17.84-17.43,27.77-41.4,27.46-66.34.28-24.81-9.56-48.65-27.27-66.03M762.23,206.11c-29.28,0-53.01-24.15-53.01-53.94s23.73-53.94,53.01-53.94,53.01,24.15,53.01,53.94-23.73,53.94-53.01,53.94" fill="white"/>
         <path d="M1107.38,85.97l-.59-.59c-36.42-36.12-95.21-35.95-131.42.39-17.76,17.4-27.62,41.31-27.29,66.17-.27,24.84,9.56,48.72,27.22,66.18,16.86,17.74,40.26,27.79,64.73,27.82.45,0,.91,0,1.36-.01,24.8.28,48.61-9.7,65.79-27.58,17.84-17.43,27.77-41.4,27.46-66.34.28-24.81-9.56-48.65-27.27-66.03M1041.37,206.11c-29.28,0-53.01-24.15-53.01-53.94s23.73-53.94,53.01-53.94,53.01,24.15,53.01,53.94-23.73,53.94-53.01,53.94" fill="white"/>
@@ -595,8 +503,6 @@ p + p { margin-top: -4px; }
 <div class="mobile-overlay" id="mobileOverlay"></div>
 
 <div class="shell">
-
-<!-- ======== SIDEBAR ======== -->
 <nav class="sidebar" id="sidebar">
   <div class="sb-logo">
     <svg viewBox="0 0 32 32" width="24" height="24"><rect width="32" height="32" rx="7" fill="#0058EA"/><path d="M8 16h5v-3h-5v3zm0 0c0 4 3 7 7 7s7-3 7-7-3-7-7-7c-2 0-4 1-5 2" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
@@ -604,37 +510,36 @@ p + p { margin-top: -4px; }
   </div>
   <div class="sb-subtitle">Web Design System</div>
 
-  <div class="sb-section-label">Foundation</div>
+  <div class="sb-section-label">Tokens</div>
   <div class="toc">
-    <a href="#colors"><span class="toc-dot" style="background:var(--gl-blue);"></span>Colors</a>
-    <a href="#typography"><span class="toc-dot" style="background:var(--gl-shadow);"></span>Typography</a>
-    <a href="#spacing"><span class="toc-dot" style="background:var(--gl-horizon);"></span>Spacing</a>
-    <a href="#radius"><span class="toc-dot" style="background:var(--gl-green);"></span>Border Radius</a>
-    <a href="#shadows"><span class="toc-dot" style="background:var(--gray-400);"></span>Shadows</a>
-    <a href="#gradients"><span class="toc-dot" style="background:var(--gl-genuine);"></span>Gradients</a>
+    <a href="#colors">Colors</a>
+    <a href="#typography">Typography</a>
+    <a href="#spacing">Spacing &amp; Layout</a>
+    <a href="#radius">Border Radius</a>
+    <a href="#shadows">Shadows</a>
+    <a href="#gradients">Gradients</a>
   </div>
 
   <div class="sb-section-label">Components</div>
   <div class="toc">
+    <a href="#header">Header / Navbar</a>
     <a href="#buttons">Buttons</a>
     <a href="#cards">Cards</a>
-    <a href="#inputs">Text Inputs</a>
-    <a href="#selection">Selection Controls</a>
-    <a href="#badges">Badges &amp; Tags</a>
-    <a href="#navigation">Navigation</a>
-    <a href="#tabs">Tabs</a>
-    <a href="#alerts">Alerts</a>
-    <a href="#avatars">Avatars</a>
-    <a href="#dividers">Dividers</a>
-    <a href="#progress">Progress</a>
-    <a href="#tooltips">Tooltips</a>
+    <a href="#accordion">Accordion</a>
+    <a href="#stats">Stats / KPIs</a>
+    <a href="#features">Feature Grid</a>
+    <a href="#forms">Forms &amp; Inputs</a>
+    <a href="#badges">Badges</a>
+    <a href="#carousel">Carousel Nav</a>
+    <a href="#locale">Locale Toggle</a>
+    <a href="#partners">Partner Cards</a>
+    <a href="#logos">Logo Bar</a>
+    <a href="#footer">Footer</a>
   </div>
 
-  <div class="sb-section-label">Patterns</div>
+  <div class="sb-section-label">Guidelines</div>
   <div class="toc">
-    <a href="#layout">Layout &amp; Grid</a>
-    <a href="#darkmode">Dark Mode</a>
-    <a href="#animation">Animation</a>
+    <a href="#breakpoints">Breakpoints</a>
     <a href="#accessibility">Accessibility</a>
   </div>
 
@@ -645,196 +550,186 @@ p + p { margin-top: -4px; }
   </div>
 </nav>
 
-<!-- ======== MAIN CONTENT ======== -->
 <main>
 
 <!-- ======== OVERVIEW ======== -->
 <section class="sec" id="overview">
   <div class="sec-hero sec-hero-tokens" data-num="DS">
     <div class="sec-title">Gogolook Web Design System</div>
-    <div class="sec-lede">A comprehensive component library and design token system for building Gogolook-branded web interfaces. Based on gogolook.com patterns, optimized for consistency, accessibility, and developer ergonomics.</div>
+    <div class="sec-lede">Component library and design tokens extracted from gogolook.com. Every component in this system is a faithful reproduction of the patterns used on the live site.</div>
   </div>
-  <p>This design system provides copy-paste ready CSS tokens, live component previews, and usage guidelines. All components use the <code>gl-</code> prefix for CSS custom properties and follow WCAG AA accessibility standards.</p>
-
-  <div class="h3">Quick Reference</div>
+  <p>Source: <strong>gogolook.com</strong> Webflow CSS &mdash; all border-radius, padding, font-size, color, and layout values are extracted from the production stylesheet.</p>
   <table class="token-table">
-    <tr><td><strong>Primary</strong></td><td><code>#0058EA</code> Gogolook Blue</td></tr>
-    <tr><td><strong>Dark</strong></td><td><code>#0F2647</code> Shadow Blue</td></tr>
-    <tr><td><strong>Accent</strong></td><td><code>#00C0FE</code> Clear Horizon</td></tr>
-    <tr><td><strong>Highlight</strong></td><td><code>#01D3B8</code> Neo Green</td></tr>
-    <tr><td><strong>Headings</strong></td><td>Plus Jakarta Sans Bold</td></tr>
-    <tr><td><strong>Body</strong></td><td>Inter Regular/Medium</td></tr>
-    <tr><td><strong>Grid</strong></td><td>12 columns &middot; 24px gutter &middot; 1200px max</td></tr>
-    <tr><td><strong>Base unit</strong></td><td>4px</td></tr>
-    <tr><td><strong>Breakpoints</strong></td><td>375 / 768 / 1024 / 1440</td></tr>
+    <tr><td><strong>Buttons</strong></td><td><code>border-radius: 100px</code> (pill-shaped, always)</td></tr>
+    <tr><td><strong>Cards</strong></td><td><code>border-radius: 20px</code></td></tr>
+    <tr><td><strong>H1</strong></td><td><code>5.5rem</code> / Plus Jakarta Sans 700</td></tr>
+    <tr><td><strong>H2</strong></td><td><code>4rem</code> / Plus Jakarta Sans 700</td></tr>
+    <tr><td><strong>Container</strong></td><td><code>90rem</code> (1440px) max-width</td></tr>
+    <tr><td><strong>Section padding</strong></td><td><code>6rem 5rem</code></td></tr>
+    <tr><td><strong>Gradient angle</strong></td><td><code>162deg</code> (4-stop: Shadow &rarr; Blue &rarr; Light Blue &rarr; Green)</td></tr>
   </table>
 </section>
 
 <!-- ======== COLORS ======== -->
 <section class="sec" id="colors">
   <div class="h2">Colors</div>
-  <p>The Gogolook color system uses four brand colors, each with a tint scale (01–03), plus a neutral gray scale and semantic colors for UI feedback.</p>
-
-  <div class="h3">Brand Colors</div>
+  <p>Five brand colors defined as CSS custom properties in the Webflow stylesheet, plus a light blue background and neutral grays.</p>
+  <div class="h3">Brand Palette (CSS Variables)</div>
   <div class="token-grid">
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#0058EA;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gogolook Blue</div><div class="token-swatch-hex">#0058EA</div><div class="token-swatch-var">--gl-blue</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#3379EE;"></div><div class="token-swatch-info"><div class="token-swatch-name">Blue 01</div><div class="token-swatch-hex">#3379EE</div><div class="token-swatch-var">--gl-blue-01</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#80ABF5;"></div><div class="token-swatch-info"><div class="token-swatch-name">Blue 02</div><div class="token-swatch-hex">#80ABF5</div><div class="token-swatch-var">--gl-blue-02</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#CCDDFA;"></div><div class="token-swatch-info"><div class="token-swatch-name">Blue 03</div><div class="token-swatch-hex">#CCDDFA</div><div class="token-swatch-var">--gl-blue-03</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#0058EA;"></div><div class="token-swatch-info"><div class="token-swatch-name">Blue</div><div class="token-swatch-hex">#0058EA</div><div class="token-swatch-var">--blue</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#0F2647;"></div><div class="token-swatch-info"><div class="token-swatch-name">Dark Blue</div><div class="token-swatch-hex">#0F2647</div><div class="token-swatch-var">--dark-blue</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#008CF4;"></div><div class="token-swatch-info"><div class="token-swatch-name">Light Blue</div><div class="token-swatch-hex">#008CF4</div><div class="token-swatch-var">--light-blue</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#01D3B8;"></div><div class="token-swatch-info"><div class="token-swatch-name">Green</div><div class="token-swatch-hex">#01D3B8</div><div class="token-swatch-var">--green</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#E7F1FD;"></div><div class="token-swatch-info"><div class="token-swatch-name">BG Blue</div><div class="token-swatch-hex">#E7F1FD</div><div class="token-swatch-var">--bg-blue</div></div></div>
   </div>
-  <div class="token-grid">
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#0F2647;"></div><div class="token-swatch-info"><div class="token-swatch-name">Shadow Blue</div><div class="token-swatch-hex">#0F2647</div><div class="token-swatch-var">--gl-shadow</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#3F516C;"></div><div class="token-swatch-info"><div class="token-swatch-name">Shadow 01</div><div class="token-swatch-hex">#3F516C</div><div class="token-swatch-var">--gl-shadow-01</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#8793A3;"></div><div class="token-swatch-info"><div class="token-swatch-name">Shadow 02</div><div class="token-swatch-hex">#8793A3</div><div class="token-swatch-var">--gl-shadow-02</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#CFD4DB;"></div><div class="token-swatch-info"><div class="token-swatch-name">Shadow 03</div><div class="token-swatch-hex">#CFD4DB</div><div class="token-swatch-var">--gl-shadow-03</div></div></div>
-  </div>
-  <div class="token-grid">
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#00C0FE;"></div><div class="token-swatch-info"><div class="token-swatch-name">Clear Horizon</div><div class="token-swatch-hex">#00C0FE</div><div class="token-swatch-var">--gl-horizon</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#33CDFE;"></div><div class="token-swatch-info"><div class="token-swatch-name">Horizon 01</div><div class="token-swatch-hex">#33CDFE</div><div class="token-swatch-var">--gl-horizon-01</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#80DFFF;"></div><div class="token-swatch-info"><div class="token-swatch-name">Horizon 02</div><div class="token-swatch-hex">#80DFFF</div><div class="token-swatch-var">--gl-horizon-02</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#CCF2FF;"></div><div class="token-swatch-info"><div class="token-swatch-name">Horizon 03</div><div class="token-swatch-hex">#CCF2FF</div><div class="token-swatch-var">--gl-horizon-03</div></div></div>
-  </div>
-  <div class="token-grid">
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#01D3B8;"></div><div class="token-swatch-info"><div class="token-swatch-name">Neo Green</div><div class="token-swatch-hex">#01D3B8</div><div class="token-swatch-var">--gl-green</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#34DCC6;"></div><div class="token-swatch-info"><div class="token-swatch-name">Green 01</div><div class="token-swatch-hex">#34DCC6</div><div class="token-swatch-var">--gl-green-01</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#80E9DB;"></div><div class="token-swatch-info"><div class="token-swatch-name">Green 02</div><div class="token-swatch-hex">#80E9DB</div><div class="token-swatch-var">--gl-green-02</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#CCF5EF;"></div><div class="token-swatch-info"><div class="token-swatch-name">Green 03</div><div class="token-swatch-hex">#CCF5EF</div><div class="token-swatch-var">--gl-green-03</div></div></div>
-  </div>
-
-  <div class="h3">Neutrals</div>
+  <div class="h3">UI Grays</div>
   <div class="token-grid" style="grid-template-columns:repeat(auto-fill,minmax(100px,1fr));">
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#F9FAFB;border-bottom:1px solid #eee;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 50</div><div class="token-swatch-hex">#F9FAFB</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#F5F7FA;border-bottom:1px solid #eee;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 100</div><div class="token-swatch-hex">#F5F7FA</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#E2E8F0;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 200</div><div class="token-swatch-hex">#E2E8F0</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#C4C9D2;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 300</div><div class="token-swatch-hex">#C4C9D2</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#94A3B8;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 400</div><div class="token-swatch-hex">#94A3B8</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#64748B;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 500</div><div class="token-swatch-hex">#64748B</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#4A5568;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 600</div><div class="token-swatch-hex">#4A5568</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#334155;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 700</div><div class="token-swatch-hex">#334155</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#1E293B;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 800</div><div class="token-swatch-hex">#1E293B</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#0F172A;"></div><div class="token-swatch-info"><div class="token-swatch-name">Gray 900</div><div class="token-swatch-hex">#0F172A</div></div></div>
-  </div>
-
-  <div class="h3">Semantic Colors</div>
-  <div class="token-grid">
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#01D3B8;"></div><div class="token-swatch-info"><div class="token-swatch-name">Success</div><div class="token-swatch-hex">#01D3B8</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#F59E0B;"></div><div class="token-swatch-info"><div class="token-swatch-name">Warning</div><div class="token-swatch-hex">#F59E0B</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#EF4444;"></div><div class="token-swatch-info"><div class="token-swatch-name">Error</div><div class="token-swatch-hex">#EF4444</div></div></div>
-    <div class="token-swatch"><div class="token-swatch-color" style="background:#00C0FE;"></div><div class="token-swatch-info"><div class="token-swatch-name">Info</div><div class="token-swatch-hex">#00C0FE</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#fafafa;border-bottom:1px solid #eee;"></div><div class="token-swatch-info"><div class="token-swatch-name">Off White</div><div class="token-swatch-hex">#FAFAFA</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#f3f3f3;border-bottom:1px solid #eee;"></div><div class="token-swatch-info"><div class="token-swatch-name">Light Gray</div><div class="token-swatch-hex">#F3F3F3</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#ededed;"></div><div class="token-swatch-info"><div class="token-swatch-name">Border</div><div class="token-swatch-hex">#EDEDED</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#c8c8c8;"></div><div class="token-swatch-info"><div class="token-swatch-name">Mid Gray</div><div class="token-swatch-hex">#C8C8C8</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#aaadb0;"></div><div class="token-swatch-info"><div class="token-swatch-name">Muted</div><div class="token-swatch-hex">#AAADB0</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#5d6c7b;"></div><div class="token-swatch-info"><div class="token-swatch-name">Slate</div><div class="token-swatch-hex">#5D6C7B</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#333;"></div><div class="token-swatch-info"><div class="token-swatch-name">Dark</div><div class="token-swatch-hex">#333333</div></div></div>
+    <div class="token-swatch"><div class="token-swatch-color" style="background:#222;"></div><div class="token-swatch-info"><div class="token-swatch-name">Charcoal</div><div class="token-swatch-hex">#222222</div></div></div>
   </div>
 </section>
 
 <!-- ======== TYPOGRAPHY ======== -->
 <section class="sec" id="typography">
   <div class="h2">Typography</div>
-  <p>Plus Jakarta Sans for headings (impact and brand personality), Inter for body text (readability at all sizes), JetBrains Mono for code.</p>
-
-  <div class="h3">Type Scale</div>
   <div class="preview-block">
+    <div class="preview-label">Type Scale (from Webflow CSS)</div>
     <div class="preview-stage preview-stage-col" style="gap:20px;">
-      <div style="font-family:var(--font-display);font-size:48px;font-weight:800;letter-spacing:-0.03em;color:var(--gray-900);line-height:1;">Display &middot; 48px</div>
-      <div style="font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:-0.02em;color:var(--gray-900);line-height:1.1;">Heading 1 &middot; 36px</div>
-      <div style="font-family:var(--font-display);font-size:24px;font-weight:700;letter-spacing:-0.01em;color:var(--gray-900);line-height:1.2;">Heading 2 &middot; 24px</div>
-      <div style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--gray-900);line-height:1.3;">Heading 3 &middot; 18px</div>
-      <div style="font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--gray-900);line-height:1.4;">Heading 4 &middot; 16px</div>
-      <div style="font-family:var(--font-body);font-size:16px;font-weight:400;color:var(--gray-700);line-height:1.6;">Body &middot; 16px / Inter Regular</div>
-      <div style="font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-500);line-height:1.6;">Body Small &middot; 14px / Inter Regular</div>
-      <div style="font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray-400);line-height:1.4;">Label &middot; 12px / Inter Semibold</div>
-      <div style="font-family:var(--font-body);font-size:12px;font-weight:400;color:var(--gray-400);line-height:1.4;">Caption &middot; 12px / Inter Regular</div>
+      <div style="font-family:var(--font-display);font-size:5.5rem;font-weight:700;letter-spacing:-0.03em;color:var(--blue);line-height:100%;">H1 &middot; 5.5rem</div>
+      <div style="font-family:var(--font-display);font-size:4rem;font-weight:700;letter-spacing:-0.02em;color:var(--blue);line-height:120%;">H2 &middot; 4rem</div>
+      <div style="font-family:var(--font-display);font-size:2.625rem;font-weight:700;color:var(--blue);line-height:120%;">H3 &middot; 2.625rem</div>
+      <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--dark-blue);line-height:130%;">H4 &middot; 1.5rem</div>
+      <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--dark-blue);line-height:140%;">H5 &middot; 1.2rem</div>
+      <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--dark-blue);line-height:140%;">H6 &middot; 1rem</div>
+      <div style="font-family:var(--font-body);font-size:1.25rem;color:var(--slate);line-height:160%;">Body Large &middot; 1.25rem / Inter</div>
+      <div style="font-family:var(--font-body);font-size:1rem;color:var(--slate);line-height:160%;">Body &middot; 1rem / Inter</div>
+      <div style="font-family:var(--font-body);font-size:0.875rem;color:#aaadb0;line-height:140%;">Small &middot; 0.875rem</div>
+      <div style="font-family:var(--font-body);font-size:0.75rem;color:#aaadb0;line-height:140%;">XS &middot; 0.75rem</div>
     </div>
   </div>
-
-  <div class="h3">Font Weights</div>
-  <table class="token-table">
-    <thead><tr><th>Weight</th><th>Value</th><th>Usage</th></tr></thead>
-    <tbody>
-      <tr><td>Regular</td><td><code>400</code></td><td>Body text, captions</td></tr>
-      <tr><td>Medium</td><td><code>500</code></td><td>Body emphasis, labels, form inputs</td></tr>
-      <tr><td>Semibold</td><td><code>600</code></td><td>Buttons, subheadings, navigation</td></tr>
-      <tr><td>Bold</td><td><code>700</code></td><td>Headings, card titles</td></tr>
-      <tr><td>Extra Bold</td><td><code>800</code></td><td>Display text, hero titles</td></tr>
-    </tbody>
-  </table>
+  <p><strong>Key pattern:</strong> H1–H3 headings use Gogolook Blue color. H4–H6 use Dark Blue. Body text uses Slate gray. All headings are Plus Jakarta Sans 700.</p>
 </section>
 
 <!-- ======== SPACING ======== -->
 <section class="sec" id="spacing">
-  <div class="h2">Spacing</div>
-  <p>All spacing uses a 4px base unit. Use the spacing scale tokens consistently instead of arbitrary values.</p>
-
-  <div class="h3">Scale</div>
+  <div class="h2">Spacing &amp; Layout</div>
+  <div class="h3">Section Padding</div>
+  <table class="token-table">
+    <thead><tr><th>Context</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Section (landscape)</td><td><code>6rem 5rem</code></td></tr>
+      <tr><td>Section (vertical)</td><td><code>6rem 0</code></td></tr>
+      <tr><td>Container max-width</td><td><code>90rem</code> (1440px)</td></tr>
+      <tr><td>Content max-width</td><td><code>66rem</code> (1056px)</td></tr>
+    </tbody>
+  </table>
+  <div class="h3">Gap Scale</div>
   <div style="margin:16px 0 24px;">
-    <div class="space-bar"><div class="space-bar-label">--gl-space-1</div><div class="space-bar-fill" style="width:4px;"></div><div class="space-bar-value">4px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-2</div><div class="space-bar-fill" style="width:8px;"></div><div class="space-bar-value">8px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-3</div><div class="space-bar-fill" style="width:12px;"></div><div class="space-bar-value">12px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-4</div><div class="space-bar-fill" style="width:16px;"></div><div class="space-bar-value">16px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-6</div><div class="space-bar-fill" style="width:24px;"></div><div class="space-bar-value">24px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-8</div><div class="space-bar-fill" style="width:32px;"></div><div class="space-bar-value">32px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-10</div><div class="space-bar-fill" style="width:40px;"></div><div class="space-bar-value">40px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-12</div><div class="space-bar-fill" style="width:48px;"></div><div class="space-bar-value">48px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-16</div><div class="space-bar-fill" style="width:64px;"></div><div class="space-bar-value">64px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-20</div><div class="space-bar-fill" style="width:80px;"></div><div class="space-bar-value">80px</div></div>
-    <div class="space-bar"><div class="space-bar-label">--gl-space-24</div><div class="space-bar-fill" style="width:96px;"></div><div class="space-bar-value">96px</div></div>
+    <div class="space-bar"><div class="space-bar-label">0.5rem</div><div class="space-bar-fill" style="width:8px;"></div><div class="space-bar-value">8px</div></div>
+    <div class="space-bar"><div class="space-bar-label">0.75rem</div><div class="space-bar-fill" style="width:12px;"></div><div class="space-bar-value">12px</div></div>
+    <div class="space-bar"><div class="space-bar-label">1rem</div><div class="space-bar-fill" style="width:16px;"></div><div class="space-bar-value">16px</div></div>
+    <div class="space-bar"><div class="space-bar-label">1.5rem</div><div class="space-bar-fill" style="width:24px;"></div><div class="space-bar-value">24px</div></div>
+    <div class="space-bar"><div class="space-bar-label">2rem</div><div class="space-bar-fill" style="width:32px;"></div><div class="space-bar-value">32px</div></div>
+    <div class="space-bar"><div class="space-bar-label">2.5rem</div><div class="space-bar-fill" style="width:40px;"></div><div class="space-bar-value">40px</div></div>
+    <div class="space-bar"><div class="space-bar-label">3rem</div><div class="space-bar-fill" style="width:48px;"></div><div class="space-bar-value">48px</div></div>
+    <div class="space-bar"><div class="space-bar-label">5rem</div><div class="space-bar-fill" style="width:80px;"></div><div class="space-bar-value">80px</div></div>
+    <div class="space-bar"><div class="space-bar-label">6rem</div><div class="space-bar-fill" style="width:96px;"></div><div class="space-bar-value">96px</div></div>
   </div>
 </section>
 
 <!-- ======== BORDER RADIUS ======== -->
 <section class="sec" id="radius">
   <div class="h2">Border Radius</div>
-  <div class="radius-grid">
-    <div><div class="radius-sample" style="border-radius:4px;">4</div><div style="font-size:11px;color:var(--gray-500);margin-top:6px;text-align:center;">sm</div></div>
-    <div><div class="radius-sample" style="border-radius:8px;">8</div><div style="font-size:11px;color:var(--gray-500);margin-top:6px;text-align:center;">md</div></div>
-    <div><div class="radius-sample" style="border-radius:12px;">12</div><div style="font-size:11px;color:var(--gray-500);margin-top:6px;text-align:center;">lg</div></div>
-    <div><div class="radius-sample" style="border-radius:16px;">16</div><div style="font-size:11px;color:var(--gray-500);margin-top:6px;text-align:center;">xl</div></div>
-    <div><div class="radius-sample" style="border-radius:20px;">20</div><div style="font-size:11px;color:var(--gray-500);margin-top:6px;text-align:center;">2xl</div></div>
-    <div><div class="radius-sample" style="border-radius:9999px;">full</div><div style="font-size:11px;color:var(--gray-500);margin-top:6px;text-align:center;">pill</div></div>
-  </div>
+  <table class="token-table">
+    <thead><tr><th>Value</th><th>Usage</th></tr></thead>
+    <tbody>
+      <tr><td><code>0</code></td><td>Form inputs (Webflow default)</td></tr>
+      <tr><td><code>4px</code></td><td>Small components, checkboxes</td></tr>
+      <tr><td><code>20px</code></td><td>Cards, images, sections, footer</td></tr>
+      <tr><td><code>100px</code></td><td>All buttons, pills, badges, tags</td></tr>
+      <tr><td><code>500px+</code></td><td>Fully rounded circles</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Key rule:</strong> Gogolook.com uses only two main radius values: <code>20px</code> for containers and <code>100px</code> for interactive pills. There are no 8px or 12px radius values.</p>
 </section>
 
 <!-- ======== SHADOWS ======== -->
 <section class="sec" id="shadows">
   <div class="h2">Shadows</div>
-  <p>Shadows use Shadow Blue tint for brand consistency instead of generic black.</p>
   <div class="shadow-grid">
-    <div class="shadow-sample" style="box-shadow:0 1px 2px rgba(15,38,71,0.05);">sm</div>
-    <div class="shadow-sample" style="box-shadow:0 4px 6px -1px rgba(15,38,71,0.07),0 2px 4px -2px rgba(15,38,71,0.05);">md</div>
-    <div class="shadow-sample" style="box-shadow:0 10px 15px -3px rgba(15,38,71,0.08),0 4px 6px -4px rgba(15,38,71,0.04);">lg</div>
-    <div class="shadow-sample" style="box-shadow:0 20px 25px -5px rgba(15,38,71,0.10),0 8px 10px -6px rgba(15,38,71,0.05);">xl</div>
+    <div class="shadow-sample" style="box-shadow:0 0 0 1px #0000001a,0 1px 3px #0000001a;">Badge</div>
+    <div class="shadow-sample" style="box-shadow:0 3px 8px #00000026;">Card</div>
+    <div class="shadow-sample" style="box-shadow:0 0 3px #3336;">Slider</div>
   </div>
+  <p>Gogolook.com uses minimal shadows. Most elevation comes from background color contrast (white cards on light blue bg) rather than drop shadows.</p>
 </section>
 
 <!-- ======== GRADIENTS ======== -->
 <section class="sec" id="gradients">
   <div class="h2">Gradients</div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:16px 0 24px;">
-    <div style="height:100px;border-radius:12px;background:linear-gradient(135deg,#0058EA 0%,#00C0FE 35%,#01D3B8 65%,#0F2647 100%);display:flex;align-items:end;padding:12px;"><span style="font-size:12px;font-weight:700;color:white;">Standard</span></div>
-    <div style="height:100px;border-radius:12px;background:linear-gradient(135deg,#0058EA 0%,#0F2647 100%);display:flex;align-items:end;padding:12px;"><span style="font-size:12px;font-weight:700;color:white;">Duotone</span></div>
-    <div style="height:100px;border-radius:12px;background:linear-gradient(135deg,#0058EA 0%,#00C0FE 100%);display:flex;align-items:end;padding:12px;"><span style="font-size:12px;font-weight:700;color:white;">Blue</span></div>
-    <div style="height:100px;border-radius:12px;background:linear-gradient(135deg,#00C0FE 0%,#01D3B8 100%);display:flex;align-items:end;padding:12px;"><span style="font-size:12px;font-weight:700;color:white;">Fresh</span></div>
-    <div style="height:100px;border-radius:12px;background:linear-gradient(135deg,#0F2647 0%,#0058EA 100%);display:flex;align-items:end;padding:12px;"><span style="font-size:12px;font-weight:700;color:white;">Dark</span></div>
+  <div class="gradient-grid">
+    <div class="gradient-card" style="background:var(--gradient-main);"><span>Main (162deg, 4-stop)</span></div>
+    <div class="gradient-card" style="background:var(--gradient-testimonial);"><span>Testimonial / Partner</span></div>
+    <div class="gradient-card" style="background:linear-gradient(162deg,var(--dark-blue),var(--blue) 34%,var(--light-blue) 65%,var(--green));"><span>Alternate (shifted stops)</span></div>
+    <div class="gradient-card" style="background:linear-gradient(90deg,var(--bg-blue),#e7f1fd00);"><span>Fade Left</span></div>
   </div>
-  <div class="guidelines-grid">
-    <div class="guideline-card"><div class="guideline-header guideline-do">DO</div><div class="guideline-body">Use gradients for hero backgrounds, feature sections, and decorative elements on digital surfaces.</div></div>
-    <div class="guideline-card"><div class="guideline-header guideline-dont">DON'T</div><div class="guideline-body">Never reproduce gradients in print materials. Add dark overlay if text contrast is insufficient.</div></div>
+  <p><strong>Key rule:</strong> Main gradient is always <code>162deg</code>, NOT 135deg. Four stops: Shadow Blue &rarr; Blue &rarr; Light Blue &rarr; Green.</p>
+</section>
+
+<!-- ======== HEADER / NAVBAR ======== -->
+<section class="sec" id="header">
+  <div class="h2">Header / Navbar</div>
+  <p>gogolook.com uses a solid blue header with white "Gogolook" wordmark and a white pill "Menu" button. No visible navigation links — all pages use the same compact header.</p>
+
+  <div class="h3">Blue Header (Primary)</div>
+  <div class="preview-block">
+    <div class="preview-stage" style="padding:0;">
+      <div class="demo-header demo-header-blue">
+        <span class="demo-header-logo">Gogolook</span>
+        <button class="demo-menu-btn demo-menu-btn-white">Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">White Header (Alternate)</div>
+  <div class="preview-block">
+    <div class="preview-stage" style="padding:16px;">
+      <div class="demo-header demo-header-white">
+        <span class="demo-header-logo">Gogolook</span>
+        <div style="display:flex;gap:24px;align-items:center;">
+          <a class="demo-nav-link" style="color:var(--slate);text-decoration:none;font-size:14px;font-weight:500;">Products</a>
+          <a class="demo-nav-link" style="color:var(--slate);text-decoration:none;font-size:14px;font-weight:500;">About</a>
+          <a class="demo-nav-link" style="color:var(--slate);text-decoration:none;font-size:14px;font-weight:500;">Careers</a>
+          <button class="demo-menu-btn demo-menu-btn-blue">Menu</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ======== BUTTONS ======== -->
 <section class="sec" id="buttons">
   <div class="h2">Buttons</div>
-  <p>Four variants: Primary (main CTA), Secondary (outline), Ghost (text-only), and Dark (on light backgrounds). Three sizes: small, default, and large.</p>
+  <p>All buttons are pill-shaped (<code>border-radius: 100px</code>). Four variants: Primary (filled blue), Outline, White, and Ghost. Most CTAs include an arrow icon (<code>&rarr;</code>).</p>
 
   <div class="h3">Variants</div>
   <div class="preview-block">
     <div class="preview-stage">
-      <button class="demo-btn demo-btn-primary">Primary</button>
-      <button class="demo-btn demo-btn-secondary">Secondary</button>
-      <button class="demo-btn demo-btn-ghost">Ghost</button>
-      <button class="demo-btn demo-btn-dark">Dark</button>
+      <button class="demo-btn demo-btn-primary">Join Us <span>&rarr;</span></button>
+      <button class="demo-btn demo-btn-outline">For Personal <span>&rarr;</span></button>
+      <button class="demo-btn demo-btn-outline">For Business <span>&rarr;</span></button>
+      <button class="demo-btn demo-btn-ghost">Learn More <span>&rarr;</span></button>
     </div>
-    <div class="preview-code"><span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"gl-btn gl-btn-primary"</span><span class="tag">&gt;</span>Primary<span class="tag">&lt;/button&gt;</span>
-<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"gl-btn gl-btn-secondary"</span><span class="tag">&gt;</span>Secondary<span class="tag">&lt;/button&gt;</span>
-<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"gl-btn gl-btn-ghost"</span><span class="tag">&gt;</span>Ghost<span class="tag">&lt;/button&gt;</span></div>
+    <div class="preview-stage preview-stage-blue">
+      <button class="demo-btn demo-btn-white">Send <span>&rarr;</span></button>
+      <button class="demo-btn" style="background:transparent;color:white;border-color:rgba(255,255,255,0.3);">Contact Us <span>&rarr;</span></button>
+    </div>
   </div>
 
   <div class="h3">Sizes</div>
@@ -850,428 +745,331 @@ p + p { margin-top: -4px; }
   <div class="preview-block">
     <div class="preview-stage">
       <button class="demo-btn demo-btn-primary">Normal</button>
-      <button class="demo-btn demo-btn-primary" style="background:var(--gl-blue-01);box-shadow:0 4px 12px rgba(0,88,234,0.3);">Hover</button>
-      <button class="demo-btn demo-btn-primary" style="background:#0046BE;">Active</button>
+      <button class="demo-btn demo-btn-primary" style="background:#0046BE;border-color:#0046BE;box-shadow:0 4px 16px rgba(0,88,234,0.3);">Hover</button>
       <button class="demo-btn demo-btn-primary demo-btn-disabled">Disabled</button>
     </div>
   </div>
 
-  <div class="h3">With Icon</div>
-  <div class="preview-block">
-    <div class="preview-stage">
-      <button class="demo-btn demo-btn-primary">Get Started <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
-      <button class="demo-btn demo-btn-secondary"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8h10"/></svg> Add Item</button>
-    </div>
-  </div>
-
   <div class="guidelines-grid">
-    <div class="guideline-card"><div class="guideline-header guideline-do">DO</div><div class="guideline-body">Use Primary for the single most important action on the page. Use Secondary for alternative actions alongside Primary.</div></div>
-    <div class="guideline-card"><div class="guideline-header guideline-dont">DON'T</div><div class="guideline-body">Don't use multiple Primary buttons in the same section. Don't use Ghost buttons for important actions.</div></div>
+    <div class="guideline-card"><div class="guideline-header guideline-do">DO</div><div class="guideline-body">Always include an arrow (&rarr;) in CTA buttons. Use Outline style for dual CTAs side-by-side ("For Personal" / "For Business").</div></div>
+    <div class="guideline-card"><div class="guideline-header guideline-dont">DON'T</div><div class="guideline-body">Never use square or small-radius buttons. Never use more than one Primary filled button in the same section.</div></div>
   </div>
 </section>
 
 <!-- ======== CARDS ======== -->
 <section class="sec" id="cards">
   <div class="h2">Cards</div>
-  <p>Three variants: Default (elevated with hover lift), Flat (border-only, no shadow), and Featured (blue border emphasis).</p>
+  <p>All cards use <code>border-radius: 20px</code>. Three main styles: default (white with border), blue background, and gradient partner card.</p>
 
   <div class="preview-block">
-    <div class="preview-stage" style="gap:20px;align-items:flex-start;">
+    <div class="preview-stage" style="gap:20px;align-items:stretch;">
       <div class="demo-card">
         <div class="demo-card-img">&#9733;</div>
-        <div class="demo-card-title">Default Card</div>
-        <div class="demo-card-body">Elevated card with hover lift effect. Use for interactive content like blog posts or products.</div>
-        <div class="demo-card-footer"><button class="demo-btn demo-btn-primary demo-btn-sm">Learn More</button></div>
+        <div class="demo-card-title">News Card</div>
+        <div class="demo-card-body">Article preview with image, heading, and excerpt. Used on Newsroom page.</div>
       </div>
-      <div class="demo-card demo-card-flat">
-        <div class="demo-card-title">Flat Card</div>
-        <div class="demo-card-body">Border-only card without shadow. Use for settings panels, info blocks, or grouped content.</div>
+      <div class="demo-card demo-card-blue-bg">
+        <div class="demo-card-title">Feature Card</div>
+        <div class="demo-card-body">Light blue background, no border. Used for "What We Do" content blocks.</div>
       </div>
-      <div class="demo-card demo-card-featured">
-        <div class="demo-badge demo-badge-blue" style="margin-bottom:12px;">Featured</div>
-        <div class="demo-card-title">Featured Card</div>
-        <div class="demo-card-body">Blue border emphasis. Use for highlighted content, pricing tiers, or recommended options.</div>
+      <div class="demo-partner-card">
+        <div class="demo-partner-name">Partner Name</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== TEXT INPUTS ======== -->
-<section class="sec" id="inputs">
-  <div class="h2">Text Inputs</div>
-  <p>Form inputs with clear focus states, error handling, and hint text. All inputs require associated labels for accessibility.</p>
+<!-- ======== ACCORDION ======== -->
+<section class="sec" id="accordion">
+  <div class="h2">Accordion</div>
+  <p>Products page uses large blue heading accordions with dashed dividers and chevron icons. Headings are <code>2rem</code> Plus Jakarta Sans 700 in Gogolook Blue.</p>
 
   <div class="preview-block">
-    <div class="preview-stage preview-stage-col" style="gap:24px;">
-      <div class="demo-input-group">
-        <label class="demo-label">Email</label>
-        <input type="email" class="demo-input" placeholder="name@company.com">
-        <div class="demo-hint">We'll never share your email.</div>
-      </div>
-      <div class="demo-input-group">
-        <label class="demo-label">Password</label>
-        <input type="password" class="demo-input demo-input-error" value="short">
-        <div class="demo-error-msg">Password must be at least 8 characters.</div>
-      </div>
-      <div class="demo-input-group">
-        <label class="demo-label">Department</label>
-        <select class="demo-input demo-select">
-          <option>Select department</option>
-          <option>Engineering</option>
-          <option>Design</option>
-          <option>Product</option>
-        </select>
-      </div>
-      <div class="demo-input-group">
-        <label class="demo-label">Message</label>
-        <textarea class="demo-input demo-textarea" placeholder="Tell us more..."></textarea>
+    <div class="preview-stage preview-stage-light preview-stage-col" style="padding:0 2rem;">
+      <div class="demo-accordion">
+        <div class="demo-accordion-item open" onclick="this.classList.toggle('open')">
+          <div class="demo-accordion-header">
+            <span class="demo-accordion-title">Trust &amp; Safety</span>
+            <svg class="demo-accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="demo-accordion-body">Whoscall, ScamAdviser, and other anti-fraud solutions protecting users from malicious calls and messages globally.</div>
+        </div>
+        <div class="demo-accordion-item" onclick="this.classList.toggle('open')">
+          <div class="demo-accordion-header">
+            <span class="demo-accordion-title">Innovation &amp; AI</span>
+            <svg class="demo-accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="demo-accordion-body">JUJI and AI-powered financial technology products leveraging advanced data analytics.</div>
+        </div>
+        <div class="demo-accordion-item" onclick="this.classList.toggle('open')">
+          <div class="demo-accordion-header">
+            <span class="demo-accordion-title">Financial Empowerment</span>
+            <svg class="demo-accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="demo-accordion-body">Roo.cash and lending products providing accessible financial services in emerging markets.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== SELECTION CONTROLS ======== -->
-<section class="sec" id="selection">
-  <div class="h2">Selection Controls</div>
+<!-- ======== STATS / KPIs ======== -->
+<section class="sec" id="stats">
+  <div class="h2">Stats / KPIs</div>
+  <p>Large numbers on the main gradient background. Numbers use Plus Jakarta Sans 700 at <code>4rem</code>, line-height 90%.</p>
 
-  <div class="h3">Checkboxes</div>
   <div class="preview-block">
-    <div class="preview-stage preview-stage-col" style="gap:12px;">
-      <div class="demo-check-group">
-        <div class="demo-checkbox demo-checkbox-checked"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2"><path d="M2 6l3 3 5-5"/></svg></div>
-        <span class="demo-check-label">Brand guidelines reviewed</span>
-      </div>
-      <div class="demo-check-group">
-        <div class="demo-checkbox"></div>
-        <span class="demo-check-label">Accessibility audit complete</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="h3">Radio Buttons</div>
-  <div class="preview-block">
-    <div class="preview-stage preview-stage-col" style="gap:12px;">
-      <div class="demo-check-group">
-        <div class="demo-radio demo-radio-checked"><div class="demo-radio-dot"></div></div>
-        <span class="demo-check-label">Light mode</span>
-      </div>
-      <div class="demo-check-group">
-        <div class="demo-radio"></div>
-        <span class="demo-check-label">Dark mode</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="h3">Switches</div>
-  <div class="preview-block">
-    <div class="preview-stage" style="gap:24px;">
-      <div class="demo-check-group">
-        <div class="demo-switch demo-switch-on"><div class="demo-switch-thumb"></div></div>
-        <span class="demo-check-label">Notifications</span>
-      </div>
-      <div class="demo-check-group">
-        <div class="demo-switch"><div class="demo-switch-thumb"></div></div>
-        <span class="demo-check-label">Marketing emails</span>
+    <div class="preview-stage" style="padding:0;">
+      <div class="demo-stats">
+        <div>
+          <div class="demo-stat-number">10B<span style="font-size:2rem;">+</span></div>
+          <div class="demo-stat-label">Malicious Calls Blocked</div>
+        </div>
+        <div>
+          <div class="demo-stat-number">5M<span style="font-size:2rem;">+</span></div>
+          <div class="demo-stat-label">Fake Data Detected</div>
+        </div>
+        <div>
+          <div class="demo-stat-number">400<span style="font-size:2rem;">+</span></div>
+          <div class="demo-stat-label">Anti-Scam Partners</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== BADGES & TAGS ======== -->
+<!-- ======== FEATURE GRID ======== -->
+<section class="sec" id="features">
+  <div class="h2">Feature Grid</div>
+  <p>4-column grid with icon + heading + description. Used on About page ("What We Do" section).</p>
+
+  <div class="preview-block">
+    <div class="preview-stage preview-stage-col">
+      <div class="demo-feature-grid">
+        <div class="demo-feature-item">
+          <div class="demo-feature-icon">&#9881;</div>
+          <div class="demo-feature-title">AI and Data-Driven</div>
+          <div class="demo-feature-desc">We use the number database as the basis for fraud prevention and risk assessment.</div>
+        </div>
+        <div class="demo-feature-item">
+          <div class="demo-feature-icon">&#9776;</div>
+          <div class="demo-feature-title">Up-to-Date Database</div>
+          <div class="demo-feature-desc">We own the largest number database in East Asia and Southeast Asia.</div>
+        </div>
+        <div class="demo-feature-item">
+          <div class="demo-feature-icon">&#9673;</div>
+          <div class="demo-feature-title">Global Partnership</div>
+          <div class="demo-feature-desc">Strategic partnerships with governments and enterprises worldwide.</div>
+        </div>
+        <div class="demo-feature-item">
+          <div class="demo-feature-icon">&#10024;</div>
+          <div class="demo-feature-title">Constant Innovation</div>
+          <div class="demo-feature-desc">Independent R&D strengthening our risk management product portfolio.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FORMS ======== -->
+<section class="sec" id="forms">
+  <div class="h2">Forms &amp; Inputs</div>
+  <p>Two input styles: underline (newsletter on blue bg) and boxed (contact page). Boxed inputs have <code>border-radius: 0</code>.</p>
+
+  <div class="h3">Underline Input (Newsletter)</div>
+  <div class="preview-block">
+    <div class="preview-stage preview-stage-blue preview-stage-col" style="gap:16px;">
+      <div style="font-family:var(--font-display);font-size:2rem;font-weight:700;color:white;line-height:120%;">Stay Informed About the Latest in Trust Trends</div>
+      <div style="display:flex;gap:16px;align-items:end;width:100%;max-width:500px;">
+        <input type="email" class="demo-input-underline" placeholder="Email" style="flex:1;">
+        <button class="demo-btn demo-btn-white demo-btn-sm">Send <span>&rarr;</span></button>
+      </div>
+      <div class="demo-checkbox-wrap">
+        <div class="demo-checkbox-box demo-checkbox-checked"></div>
+        <div class="demo-checkbox-label" style="color:rgba(255,255,255,0.6);font-size:12px;">I agree to receive updates and have read the Privacy Policy</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">Boxed Input (Contact Form)</div>
+  <div class="preview-block">
+    <div class="preview-stage preview-stage-col" style="gap:16px;max-width:400px;">
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <label style="font-size:12px;font-weight:600;color:var(--dark-blue);">Name</label>
+        <input type="text" class="demo-input-boxed" placeholder="Your name">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <label style="font-size:12px;font-weight:600;color:var(--dark-blue);">Email</label>
+        <input type="email" class="demo-input-boxed" placeholder="name@company.com">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <label style="font-size:12px;font-weight:600;color:var(--dark-blue);">Topic</label>
+        <select class="demo-input-boxed"><option>Select a topic</option><option>Business Inquiry</option><option>Partnership</option></select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== BADGES ======== -->
 <section class="sec" id="badges">
-  <div class="h2">Badges &amp; Tags</div>
-
-  <div class="h3">Badges</div>
+  <div class="h2">Badges</div>
   <div class="preview-block">
     <div class="preview-stage">
       <span class="demo-badge demo-badge-blue">Blue</span>
       <span class="demo-badge demo-badge-green">Success</span>
-      <span class="demo-badge demo-badge-horizon">Info</span>
-      <span class="demo-badge demo-badge-shadow">Neutral</span>
-      <span class="demo-badge demo-badge-warning">Warning</span>
-      <span class="demo-badge demo-badge-error">Error</span>
+      <span class="demo-badge demo-badge-red">Error</span>
+      <span class="demo-badge demo-badge-dark">Dark</span>
     </div>
   </div>
+</section>
 
-  <div class="h3">Tags</div>
+<!-- ======== CAROUSEL NAV ======== -->
+<section class="sec" id="carousel">
+  <div class="h2">Carousel Navigation</div>
+  <p>Used on milestones, partners, and testimonial carousels. Circle arrow buttons, outline or filled.</p>
   <div class="preview-block">
     <div class="preview-stage">
-      <span class="demo-tag demo-tag-active">Active Tag</span>
-      <span class="demo-tag">Design</span>
-      <span class="demo-tag">Engineering</span>
-      <span class="demo-tag">Product</span>
-    </div>
-  </div>
-</section>
-
-<!-- ======== NAVIGATION ======== -->
-<section class="sec" id="navigation">
-  <div class="h2">Navigation</div>
-
-  <div class="h3">Light Navigation Bar</div>
-  <div class="preview-block">
-    <div class="preview-stage preview-stage-col">
-      <div class="demo-navbar">
-        <span class="demo-nav-logo">Gogolook</span>
-        <ul class="demo-nav-links">
-          <li><a class="demo-nav-link demo-nav-link-active">Products</a></li>
-          <li><a class="demo-nav-link">About</a></li>
-          <li><a class="demo-nav-link">Careers</a></li>
-          <li><a class="demo-nav-link">Contact</a></li>
-        </ul>
-        <button class="demo-btn demo-btn-primary demo-btn-sm">Get Started</button>
+      <div class="demo-carousel-nav">
+        <button class="demo-carousel-btn">&larr;</button>
+        <button class="demo-carousel-btn">&rarr;</button>
       </div>
-    </div>
-  </div>
-
-  <div class="h3">Dark Navigation Bar</div>
-  <div class="preview-block">
-    <div class="preview-stage preview-stage-dark preview-stage-col">
-      <div class="demo-navbar demo-navbar-dark">
-        <span class="demo-nav-logo">Gogolook</span>
-        <ul class="demo-nav-links">
-          <li><a class="demo-nav-link demo-nav-link-active">Products</a></li>
-          <li><a class="demo-nav-link">About</a></li>
-          <li><a class="demo-nav-link">Careers</a></li>
-          <li><a class="demo-nav-link">Contact</a></li>
-        </ul>
-        <button class="demo-btn demo-btn-primary demo-btn-sm">Get Started</button>
+      <div style="width:24px;"></div>
+      <div class="demo-carousel-nav">
+        <button class="demo-carousel-btn demo-carousel-btn-filled">&larr;</button>
+        <button class="demo-carousel-btn demo-carousel-btn-filled">&rarr;</button>
       </div>
+      <div style="width:24px;"></div>
+      <span style="font-size:14px;font-weight:600;color:var(--slate);">1 / 4</span>
     </div>
   </div>
 </section>
 
-<!-- ======== TABS ======== -->
-<section class="sec" id="tabs">
-  <div class="h2">Tabs</div>
-  <div class="preview-block">
-    <div class="preview-stage preview-stage-col">
-      <div class="demo-tabs">
-        <div class="demo-tab demo-tab-active">Overview</div>
-        <div class="demo-tab">Features</div>
-        <div class="demo-tab">Pricing</div>
-        <div class="demo-tab">FAQ</div>
-      </div>
-      <div style="padding:20px 0;font-size:14px;color:var(--gray-500);">Tab content would appear here.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== ALERTS ======== -->
-<section class="sec" id="alerts">
-  <div class="h2">Alerts</div>
-  <div class="preview-block">
-    <div class="preview-stage preview-stage-col" style="gap:12px;">
-      <div class="demo-alert demo-alert-info"><span class="demo-alert-icon">&#8505;</span><span>This is an informational message about the current status.</span></div>
-      <div class="demo-alert demo-alert-success"><span class="demo-alert-icon">&#10003;</span><span>Changes saved successfully. Your profile has been updated.</span></div>
-      <div class="demo-alert demo-alert-warning"><span class="demo-alert-icon">&#9888;</span><span>Your session will expire in 5 minutes. Save your work.</span></div>
-      <div class="demo-alert demo-alert-error"><span class="demo-alert-icon">&#10007;</span><span>Unable to process your request. Please try again later.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== AVATARS ======== -->
-<section class="sec" id="avatars">
-  <div class="h2">Avatars</div>
+<!-- ======== LOCALE TOGGLE ======== -->
+<section class="sec" id="locale">
+  <div class="h2">Locale Toggle</div>
   <div class="preview-block">
     <div class="preview-stage">
-      <div class="demo-avatar demo-avatar-sm">J</div>
-      <div class="demo-avatar">JL</div>
-      <div class="demo-avatar demo-avatar-lg">GL</div>
-      <div class="demo-avatar-group">
-        <div class="demo-avatar" style="background:var(--gl-blue);">A</div>
-        <div class="demo-avatar" style="background:var(--gl-genuine);">B</div>
-        <div class="demo-avatar" style="background:var(--gl-green);">C</div>
-        <div class="demo-avatar" style="background:var(--gl-shadow);">+3</div>
+      <div class="demo-locale">
+        <button class="demo-locale-btn demo-locale-btn-active">EN</button>
+        <button class="demo-locale-btn">中文</button>
+      </div>
+    </div>
+    <div class="preview-stage preview-stage-dark">
+      <div class="demo-locale">
+        <button class="demo-locale-btn" style="background:transparent;border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);">EN</button>
+        <button class="demo-locale-btn" style="background:transparent;border-color:var(--white);color:var(--white);">中文</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== DIVIDERS ======== -->
-<section class="sec" id="dividers">
-  <div class="h2">Dividers</div>
+<!-- ======== PARTNER CARDS ======== -->
+<section class="sec" id="partners">
+  <div class="h2">Partner Cards</div>
   <div class="preview-block">
-    <div class="preview-stage preview-stage-col" style="gap:20px;">
-      <div class="demo-divider"></div>
-      <div class="demo-divider-label">OR</div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== PROGRESS ======== -->
-<section class="sec" id="progress">
-  <div class="h2">Progress</div>
-  <div class="preview-block">
-    <div class="preview-stage preview-stage-col" style="gap:16px;">
-      <div><div style="font-size:12px;font-weight:600;color:var(--gray-600);margin-bottom:6px;">25%</div><div class="demo-progress"><div class="demo-progress-fill" style="width:25%;"></div></div></div>
-      <div><div style="font-size:12px;font-weight:600;color:var(--gray-600);margin-bottom:6px;">60%</div><div class="demo-progress"><div class="demo-progress-fill" style="width:60%;"></div></div></div>
-      <div><div style="font-size:12px;font-weight:600;color:var(--gray-600);margin-bottom:6px;">100%</div><div class="demo-progress"><div class="demo-progress-fill" style="width:100%;background:var(--success);"></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== TOOLTIPS ======== -->
-<section class="sec" id="tooltips">
-  <div class="h2">Tooltips</div>
-  <div class="preview-block">
-    <div class="preview-stage" style="padding:48px 32px 32px;">
-      <div class="demo-tooltip-wrap">
-        <div class="demo-tooltip">Helpful information</div>
-        <button class="demo-btn demo-btn-secondary">Hover me</button>
+    <div class="preview-stage" style="gap:20px;">
+      <div class="demo-partner-card" style="width:280px;">
+        <div class="demo-partner-name">National Police Agency, MOI</div>
+      </div>
+      <div class="demo-partner-card" style="width:280px;">
+        <div class="demo-partner-name">Taiwan Financial Supervisory Commission</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== LAYOUT & GRID ======== -->
-<section class="sec" id="layout">
-  <div class="h2">Layout &amp; Grid</div>
-  <p>12-column grid with 24px gutters. Max container width 1200px. Content stacks to single column below 768px.</p>
-
-  <div class="h3">Grid System</div>
+<!-- ======== LOGO BAR ======== -->
+<section class="sec" id="logos">
+  <div class="h2">Logo Bar</div>
   <div class="preview-block">
-    <div class="preview-stage preview-stage-col" style="gap:8px;">
-      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;width:100%;">
-        <div style="grid-column:span 12;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">12 cols</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;width:100%;">
-        <div style="grid-column:span 6;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">6</div>
-        <div style="grid-column:span 6;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">6</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;width:100%;">
-        <div style="grid-column:span 4;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">4</div>
-        <div style="grid-column:span 4;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">4</div>
-        <div style="grid-column:span 4;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">4</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;width:100%;">
-        <div style="grid-column:span 3;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">3</div>
-        <div style="grid-column:span 3;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">3</div>
-        <div style="grid-column:span 3;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">3</div>
-        <div style="grid-column:span 3;background:var(--gl-blue-03);padding:8px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;color:var(--gl-blue);">3</div>
+    <div class="preview-stage preview-stage-light">
+      <div class="demo-logo-bar" style="width:100%;">
+        <span class="demo-logo-item">ScamAdviser</span>
+        <span class="demo-logo-item">袋鼠金融</span>
+        <span class="demo-logo-item">美玉姨</span>
+        <span class="demo-logo-item">JUJI</span>
+        <span class="demo-logo-item">spotONE</span>
+        <span class="demo-logo-item">CallDefender</span>
+        <span class="demo-logo-item">Message Checker</span>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="h3">Breakpoints</div>
+<!-- ======== FOOTER ======== -->
+<section class="sec" id="footer">
+  <div class="h2">Footer</div>
+  <p>Dark Blue background with 3-column link grid, social icons, giant translucent "Gogolook" watermark, and language toggle.</p>
+  <div class="preview-block">
+    <div class="preview-stage" style="padding:0;">
+      <div class="demo-footer">
+        <div class="demo-footer-grid">
+          <div>
+            <div class="demo-footer-heading">Company</div>
+            <a class="demo-footer-link">About</a>
+            <a class="demo-footer-link">Newsroom</a>
+            <a class="demo-footer-link">Investors</a>
+            <a class="demo-footer-link">ESG</a>
+          </div>
+          <div>
+            <div class="demo-footer-heading">Products</div>
+            <a class="demo-footer-link">For Personal</a>
+            <a class="demo-footer-link">For Business</a>
+          </div>
+          <div>
+            <div class="demo-footer-heading">Contact</div>
+            <a class="demo-footer-link">Get in Touch</a>
+            <a class="demo-footer-link">Careers</a>
+          </div>
+          <div class="demo-footer-social">
+            <div class="demo-footer-social-icon">f</div>
+            <div class="demo-footer-social-icon">in</div>
+          </div>
+        </div>
+        <div class="demo-footer-watermark">Gogolook</div>
+        <div class="demo-footer-bottom">
+          <span>&copy; 2025 Gogolook. All Rights Reserved.</span>
+          <div class="demo-locale">
+            <button class="demo-locale-btn" style="background:transparent;border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);width:32px;height:32px;font-size:10px;">EN</button>
+            <button class="demo-locale-btn" style="background:transparent;border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);width:32px;height:32px;font-size:10px;">中文</button>
+          </div>
+          <span>Privacy &middot; Terms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== BREAKPOINTS ======== -->
+<section class="sec" id="breakpoints">
+  <div class="h2">Breakpoints</div>
   <table class="token-table">
-    <thead><tr><th>Name</th><th>Min Width</th><th>Usage</th></tr></thead>
+    <thead><tr><th>Breakpoint</th><th>Max Width</th><th>Behavior</th></tr></thead>
     <tbody>
-      <tr><td>Mobile</td><td><code>375px</code></td><td>Single column, stacked layout</td></tr>
-      <tr><td>Tablet</td><td><code>768px</code></td><td>Two-column layouts, side navigation</td></tr>
-      <tr><td>Desktop</td><td><code>1024px</code></td><td>Full 12-column grid</td></tr>
-      <tr><td>Wide</td><td><code>1440px</code></td><td>Max content width, centered</td></tr>
+      <tr><td>Desktop</td><td><code>&gt; 991px</code></td><td>Full layout, 90rem container</td></tr>
+      <tr><td>Tablet</td><td><code>&le; 991px</code></td><td>Container 728px, reduced font sizes</td></tr>
+      <tr><td>Mobile Landscape</td><td><code>&le; 767px</code></td><td>Single column, stacked layouts</td></tr>
+      <tr><td>Mobile Portrait</td><td><code>&le; 479px</code></td><td>Smallest layout, hamburger nav</td></tr>
     </tbody>
   </table>
-
-  <div class="h3">Container Widths</div>
-  <table class="token-table">
-    <thead><tr><th>Token</th><th>Width</th><th>Usage</th></tr></thead>
-    <tbody>
-      <tr><td><code>--gl-container-sm</code></td><td>640px</td><td>Narrow content (forms, articles)</td></tr>
-      <tr><td><code>--gl-container-md</code></td><td>768px</td><td>Medium content</td></tr>
-      <tr><td><code>--gl-container-lg</code></td><td>960px</td><td>Standard page content</td></tr>
-      <tr><td><code>--gl-container-xl</code></td><td>1200px</td><td>Full width (default)</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ======== DARK MODE ======== -->
-<section class="sec" id="darkmode">
-  <div class="h2">Dark Mode</div>
-  <p>Dark mode uses Shadow Blue backgrounds (never pure black). Apply via <code>[data-theme="dark"]</code> or <code>.gl-dark</code> class.</p>
-
-  <div class="preview-block">
-    <div class="preview-stage preview-stage-dark preview-stage-col" style="gap:16px;">
-      <div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--white);">Dark Mode Heading</div>
-      <div style="font-size:14px;color:rgba(255,255,255,0.72);line-height:1.6;">Body text on dark surfaces uses reduced opacity white for comfortable reading. Never use pure white for body text.</div>
-      <div style="display:flex;gap:12px;">
-        <button class="demo-btn demo-btn-primary">Primary</button>
-        <button class="demo-btn demo-btn-secondary" style="color:var(--white);border-color:rgba(255,255,255,0.3);">Secondary</button>
-      </div>
-      <div style="display:flex;gap:8px;">
-        <span class="demo-badge" style="background:rgba(0,88,234,0.2);color:#80ABF5;">Badge</span>
-        <span class="demo-badge" style="background:rgba(1,211,184,0.15);color:#34DCC6;">Success</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="h3">Surface Tokens</div>
-  <table class="token-table">
-    <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
-    <tbody>
-      <tr><td><code>--gl-bg-primary</code></td><td>#0F2647</td><td>Base background</td></tr>
-      <tr><td><code>--gl-bg-secondary</code></td><td>#162D52</td><td>Cards, panels</td></tr>
-      <tr><td><code>--gl-bg-tertiary</code></td><td>#1C3660</td><td>Hover states</td></tr>
-      <tr><td><code>--gl-bg-elevated</code></td><td>#22406E</td><td>Modals, dropdowns</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ======== ANIMATION ======== -->
-<section class="sec" id="animation">
-  <div class="h2">Animation</div>
-
-  <div class="h3">Transition Tokens</div>
-  <table class="token-table">
-    <thead><tr><th>Token</th><th>Duration</th><th>Easing</th><th>Usage</th></tr></thead>
-    <tbody>
-      <tr><td><code>--gl-transition-fast</code></td><td>150ms</td><td>ease</td><td>Hover color, opacity</td></tr>
-      <tr><td><code>--gl-transition-base</code></td><td>200ms</td><td>ease</td><td>Default hover, focus rings</td></tr>
-      <tr><td><code>--gl-transition-slow</code></td><td>300ms</td><td>ease</td><td>Expand/collapse, modals</td></tr>
-      <tr><td><code>--gl-transition-page</code></td><td>300ms</td><td>ease-in-out</td><td>Page transitions</td></tr>
-    </tbody>
-  </table>
-
-  <div class="h3">Entrance Animations</div>
-  <table class="token-table">
-    <thead><tr><th>Name</th><th>Effect</th><th>Duration</th></tr></thead>
-    <tbody>
-      <tr><td><code>gl-fade-in</code></td><td>Opacity 0 &rarr; 1</td><td>300ms</td></tr>
-      <tr><td><code>gl-slide-up</code></td><td>Fade + translate Y 16px &rarr; 0</td><td>400ms</td></tr>
-      <tr><td><code>gl-scale-in</code></td><td>Fade + scale 0.95 &rarr; 1</td><td>200ms</td></tr>
-    </tbody>
-  </table>
-
-  <div class="guidelines-grid">
-    <div class="guideline-card"><div class="guideline-header guideline-do">DO</div><div class="guideline-body">Only animate transform and opacity. Respect <code>prefers-reduced-motion</code>. Keep hover transitions under 200ms.</div></div>
-    <div class="guideline-card"><div class="guideline-header guideline-dont">DON'T</div><div class="guideline-body">Never use bounce, elastic, or spring easings. Don't animate layout properties (width, height, top, left).</div></div>
-  </div>
 </section>
 
 <!-- ======== ACCESSIBILITY ======== -->
 <section class="sec" id="accessibility">
   <div class="h2">Accessibility</div>
-  <p>All components meet WCAG AA standards. Minimum 4.5:1 contrast ratio for normal text, 3:1 for large text and UI elements.</p>
-
-  <div class="h3">Contrast Pairs</div>
   <table class="token-table">
-    <thead><tr><th>Pair</th><th>Ratio</th><th>Status</th></tr></thead>
+    <thead><tr><th>Color Pair</th><th>Ratio</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td>Black on White</td><td>21:1</td><td><span class="demo-badge demo-badge-green">Pass</span></td></tr>
-      <tr><td>White on Gogolook Blue</td><td>4.6:1</td><td><span class="demo-badge demo-badge-green">Pass</span></td></tr>
-      <tr><td>White on Shadow Blue</td><td>13.5:1</td><td><span class="demo-badge demo-badge-green">Pass</span></td></tr>
-      <tr><td>White on Clear Horizon</td><td>3.1:1</td><td><span class="demo-badge demo-badge-warning">Large only</span></td></tr>
-      <tr><td>White on Neo Green</td><td>2.8:1</td><td><span class="demo-badge demo-badge-error">Fail</span></td></tr>
+      <tr><td>White on Blue (#0058EA)</td><td>4.6:1</td><td><span class="demo-badge demo-badge-green">AA Pass</span></td></tr>
+      <tr><td>White on Dark Blue (#0F2647)</td><td>13.5:1</td><td><span class="demo-badge demo-badge-green">AAA Pass</span></td></tr>
+      <tr><td>White on Light Blue (#008CF4)</td><td>3.1:1</td><td><span class="demo-badge demo-badge-blue">Large Only</span></td></tr>
+      <tr><td>White on Green (#01D3B8)</td><td>2.8:1</td><td><span class="demo-badge demo-badge-red">Fail</span></td></tr>
+      <tr><td>Blue on White</td><td>4.6:1</td><td><span class="demo-badge demo-badge-green">AA Pass</span></td></tr>
     </tbody>
   </table>
-
-  <div class="h3">Requirements Checklist</div>
-  <div style="margin:16px 0;font-size:14px;font-weight:500;color:var(--gray-700);line-height:2;">
-    &bull; All interactive elements reachable via Tab<br>
-    &bull; Focus visible: <code>outline: 2px solid var(--gl-blue); outline-offset: 2px</code><br>
-    &bull; Escape key closes modals and dropdowns<br>
-    &bull; Skip-to-content link as first focusable element<br>
-    &bull; Images have <code>alt</code> text; decorative images use <code>alt=""</code><br>
-    &bull; Form inputs have associated <code>&lt;label&gt;</code> elements<br>
-    &bull; Buttons use <code>&lt;button&gt;</code>, links use <code>&lt;a&gt;</code><br>
-    &bull; Heading hierarchy (h1 &rarr; h2 &rarr; h3) without skipping levels<br>
-    &bull; <code>prefers-reduced-motion</code> disables all animations
-  </div>
-
   <div class="guidelines-grid">
-    <div class="guideline-card"><div class="guideline-header guideline-do">DO</div><div class="guideline-body">Use Neo Green and Clear Horizon only for decorative elements, badge backgrounds, or large bold text on white backgrounds.</div></div>
-    <div class="guideline-card"><div class="guideline-header guideline-dont">DON'T</div><div class="guideline-body">Never use Neo Green or Clear Horizon as body text color on white. Never rely on color alone to convey information.</div></div>
+    <div class="guideline-card"><div class="guideline-header guideline-do">DO</div><div class="guideline-body">Use Blue or Dark Blue for text on white. Use white text on Blue or Dark Blue backgrounds. Green is safe for large headings on gradient backgrounds.</div></div>
+    <div class="guideline-card"><div class="guideline-header guideline-dont">DON'T</div><div class="guideline-body">Never use Green (#01D3B8) as body text color on white. Never use Light Blue (#008CF4) for small text on white.</div></div>
   </div>
 </section>
 
@@ -1299,52 +1097,25 @@ function tryLogin() {
 }
 btn.addEventListener('click', tryLogin);
 input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryLogin(); });
+try { if (sessionStorage.getItem('gl-ds-auth') === '1') { gate.classList.add('hidden'); document.body.classList.remove('locked'); } } catch(e) {}
 
-try {
-  if (sessionStorage.getItem('gl-ds-auth') === '1') {
-    gate.classList.add('hidden');
-    document.body.classList.remove('locked');
-  }
-} catch(e) {}
-
-/* Active TOC tracking */
 var tocLinks = document.querySelectorAll('.toc a');
 var sections = document.querySelectorAll('.sec');
-
 function updateToc() {
   var scrollY = window.scrollY + 100;
   var current = '';
-  sections.forEach(function(s) {
-    if (s.offsetTop <= scrollY) current = s.id;
-  });
-  tocLinks.forEach(function(a) {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-  });
+  sections.forEach(function(s) { if (s.offsetTop <= scrollY) current = s.id; });
+  tocLinks.forEach(function(a) { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
 }
 window.addEventListener('scroll', updateToc);
 updateToc();
 
-/* Mobile sidebar */
 var toggle = document.getElementById('mobileToggle');
 var sidebar = document.getElementById('sidebar');
 var overlay = document.getElementById('mobileOverlay');
-
-toggle.addEventListener('click', function() {
-  sidebar.classList.toggle('open');
-  overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
-});
-overlay.addEventListener('click', function() {
-  sidebar.classList.remove('open');
-  overlay.style.display = 'none';
-});
-tocLinks.forEach(function(a) {
-  a.addEventListener('click', function() {
-    if (window.innerWidth <= 1024) {
-      sidebar.classList.remove('open');
-      overlay.style.display = 'none';
-    }
-  });
-});
+toggle.addEventListener('click', function() { sidebar.classList.toggle('open'); overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none'; });
+overlay.addEventListener('click', function() { sidebar.classList.remove('open'); overlay.style.display = 'none'; });
+tocLinks.forEach(function(a) { a.addEventListener('click', function() { if (window.innerWidth <= 1024) { sidebar.classList.remove('open'); overlay.style.display = 'none'; } }); });
 </script>
 </body>
 </html>
